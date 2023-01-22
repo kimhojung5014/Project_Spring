@@ -10,30 +10,70 @@ public class Criteria {
     /* 한 페이지 당 보여질 게시물 갯수 */
     private int amount;
     
+    /*검색, 카테고리 기능 시 페이지 넘김 시 값 저장*/
     private String category,
     			   chooseSearch,
     			   search;
     
+    
+    /*직업 추천 결과 페이지 변수 저장*/
+    private String ability, profrssion, priority;
+    
     /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
     public Criteria() {
-        this(1,10,null,null,null);
+        this(1,10,null,null,null,null,null,null);
     }
 
 
 	/* 생성자 => 원하는 pageNum, 원하는 amount */
-    public Criteria(int pageNum, int amount, String category, String chooseSearch, String search) {
-        this.pageNum = pageNum;
-        this.amount = amount;
-        this.category = category;
-        this.chooseSearch = chooseSearch;
-        this.search = search;
-        System.out.println("시작 페이지: "+pageNum);
-        System.out.println("출력할 개수: "+amount);
-    }
+
 
 	public int getPageNum() {
 		return pageNum;
 	}
+
+	public String getability() {
+		return ability;
+	}
+
+
+	public void setability(String ability) {
+		this.ability = ability;
+	}
+
+
+	public String getProfrssion() {
+		return profrssion;
+	}
+
+
+	public void setProfrssion(String profrssion) {
+		this.profrssion = profrssion;
+	}
+
+
+	public String getPriority() {
+		return priority;
+	}
+
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+
+	public Criteria(int pageNum, int amount, String category, String chooseSearch, String search, String ability,
+			String profrssion, String priority) {
+		this.pageNum = pageNum;
+		this.amount = amount;
+		this.category = category;
+		this.chooseSearch = chooseSearch;
+		this.search = search;
+		this.ability = ability;
+		this.profrssion = profrssion;
+		this.priority = priority;
+	}
+
 
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;

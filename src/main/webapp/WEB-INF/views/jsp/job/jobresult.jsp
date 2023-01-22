@@ -8,12 +8,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/header_footer.css">
-  <link rel="stylesheet" href="css/job.css?12">
+  <link rel="stylesheet" href="resources/css/header_footer.css">
+  <link rel="stylesheet" href="resources/css/job.css">
+  <link rel="stylesheet" href="resources/css/page.css">
   <title>직업 추천 결과</title>
 </head>
 <body>
-
+<script src="resources/js/jquery-3.6.3.min.js"></script>
    <!-- 헤더 부분 -->
   <header id="headerstyle">
     <div id="titleHome">
@@ -129,7 +130,7 @@
 
         <p class="subtitle">조건에 맞는 직업 리스트</p>
         <br>
-        <p class="subsubtitle">총 ${fn:length(jobList) }건이 검색되었습니다.</p>
+        <p class="subsubtitle">총 ${pageMaker.total }건이 검색되었습니다.</p>
         <br>
         <div class="title">
           <p >직업 정보</p>
@@ -151,7 +152,7 @@
 
               <span class="listJobEtc2"><span class="listJobEtcColor">핵심 능력: </span><b>${list.ability}</b></span>
             </p>
-            <p class="listJobExplain" >- ${list.summary}</p>
+            <p class="listJobExplain" >${list.summary}</p>
              <p class="listJobExplain">
               <c:choose>
               	<c:when test="${not empty list.similarJob  }">
@@ -287,23 +288,53 @@
 		  </c:forEach>
         </ul>
         <!-- 아래 페이지 넘버 부분 -->
-        <!-- <div class="oncenter">
-        <ul id="pageNumber">
-          <li><a href="pre">&larr;</a></li>
-          <li><a href="job.html">1</a></li>
-          <li><a href="job2">2</a></li>
-          <li><a href="job3">3</a></li>
-          <li><a href="job4">4</a></li>
-          <li><a href="job5">5</a></li>
-          <li>.</li>
-          <li>.</li>
-          <li>.</li>
-          <li>.</li>
-          <li><a href="next">10</a></li>
-          <li><a href="">&rarr;</a></li>
-        </ul>  
-        <br>
-        </div> -->
+        <div class="pageInfo_area">
+ 			<table id="pageInfo" class="pageInfo oncenter">
+ 				<!-- 이전페이지 버튼 -->
+ 				<tr>
+ 					<c:if test="${pageMaker.total ne 0}">
+                		<td class="pageInfo_btn"><a style="display: inline-block;" href="${1}">처음</a></td>
+                	</c:if>
+                	
+               		 <c:if test="${pageMaker.prev}">
+                    <td class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">&larr;</a></td>
+               		 </c:if>
+
+                <!-- 각 번호 페이지 버튼 -->
+                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                   <c:if test="${num ne 0}">
+                    <td class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></td>
+                    </c:if>
+                </c:forEach>
+
+                <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                    <td class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">&rarr;</a></td>
+                </c:if> 
+                <c:if test="${pageMaker.total ne 0}">
+                <td class="pageInfo_btn"><a style="display: inline-block;" href="${pageMaker.realEnd}">&nbsp;끝</a></td>
+                </c:if>
+                <tr>
+ 			</table>
+        </div>
+    <form id="moveForm" method="post">
+            <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+   			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+   			<input type="hidden" name="ability" value="${pageMaker.cri.ability}">
+   			<input type="hidden" name="profrssion" value="${pageMaker.cri.profrssion}">
+   			<input type="hidden" name="priority" value="${pageMaker.cri.priority}">
+   			
+  	</form>
+  	<script type="text/javascript">
+	$(".pageInfo a").on("click", function(e){
+		let moveForm = $("#moveForm");
+	    e.preventDefault();
+	    moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	    moveForm.attr("action", "jobRecommend");
+	    moveForm.submit();
+	    
+	});  	
+  	</script>
         <!-- 페이지 넘버부분 끝 -->
       </div>
     

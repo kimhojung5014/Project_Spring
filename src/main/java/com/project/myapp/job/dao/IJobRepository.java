@@ -12,9 +12,11 @@ public interface IJobRepository {
 	
 	public List<JobListVo> JobList(Criteria cri);
 	
-	public List<JobListVo> jobRecommendList(String ability,String kindOfJob,String possibility);
+	public List<JobDetailVo> jobRecommendList(Criteria cri);
 	
 	public JobDetailVo Jobdetail(String job);
 	
 	public int JobTotal(Criteria cri);
+	
+	public int JobRecommendTotal(Criteria cri);
 	}

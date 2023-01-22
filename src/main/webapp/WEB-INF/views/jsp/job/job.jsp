@@ -139,8 +139,8 @@
           	
 	          <p class="subsubtitle">1.선호하는 직업 유형을 선택해주세요.</p>
 	          <br>
-	          <select  name="kindOfJob" id="kindOfJob" >
-	            <option value="all">전체</option>
+	          <select  name="profrssion" id="profrssion" >
+	            <option value="All" selected>전체</option>
 	
 	            <option value="운동 관련직">운동 관련직</option>
 	            
@@ -196,7 +196,7 @@
 	            
 	            <option value="사회서비스직">사회서비스직</option>
 	            
-	            <option value="IT관련전문직" selected>IT관련전문직</option>
+	            <option value="IT관련전문직" >IT관련전문직</option>
 	            
 	            <option value="언어 관련 전문직">언어 관련 전문직</option>
 	            
@@ -210,7 +210,7 @@
 	            
 	            <option value="일반운전 관련직">일반운전 관련직</option>
 	            
-	            <option value="미용 관련직">미용 관련직</option>
+	            <option value="이미용 관련직">미용 관련직</option>
 	
 	            <option value="공학 전문직">공학 전문직</option>
 	
@@ -231,6 +231,7 @@
               <br><br>
           	  <p class="subsubtitle">2.본인이 자신있는 장점을 1개 선택해주세요.</p>
           	  <br>
+          	  	<label><input name="ability" type="radio" value="All">전체</label>
           		<label><input name="ability" type="radio" value="신체운동">신체운동</label>
           		<label><input name="ability" type="radio" value="손재능">손재능</label>
           		<label><input name="ability" type="radio" value="공간시각">공간시각</label>
@@ -247,22 +248,22 @@
 	          <br>
 	          <ul class="jobAptitude">
 	            <li>
-	              <input type="radio" name="possibility" value="REWARDVALUE"> 보상
+	              <input type="radio" name="priority" value="REWARDVALUE"> 보상
 	            </li>
 	            <li>
-	              <input type="radio" name="possibility" value="EMPLOYMENTSECURITYVALUE"> 고용안정률
+	              <input type="radio" name="priority" value="EMPLOYMENTSECURITYVALUE"> 고용안정률
 	            </li>
 	            <li>
-	              <input type="radio"name="possibility" value="DEVELOPMENTPOSSIBILITYVALUE"> 발전가능성
+	              <input type="radio"name="priority" value="DEVELOPMENTPOSSIBILITYVALUE"> 발전가능성
 	            </li>
 	            <li>
-	              <input type="radio" name="possibility" value="WORKINGCONDITIONSVALUE"> 근무여건
+	              <input type="radio" name="priority" value="WORKINGCONDITIONSVALUE"> 근무여건
 	            </li>
 	            <li>
-	              <input type="radio" name="possibility" value="PROFESSIONALVALUE"> 직업전문성
+	              <input type="radio" name="priority" value="PROFESSIONALVALUE"> 직업전문성
 	            </li>
 	            <li>
-	              <input type="radio" name="possibility" value="EQUALEMPLOYMENTVALUE"> 평등한 고용
+	              <input type="radio" name="priority" value="EQUALEMPLOYMENTVALUE"> 평등한 고용
 	            </li>
 	          </ul>
          </div>
@@ -404,7 +405,7 @@
 	function check() {
 		let possibilityNum = 0;
 		let abilityNum = 0;
- 		let possibility = document.getElementsByName("possibility");
+ 		let possibility = document.getElementsByName("priority");
  		let ability = document.getElementsByName("ability");
  		
 		for (let i = 0; i < possibility.length; i++) {
