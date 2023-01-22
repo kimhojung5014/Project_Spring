@@ -1,0 +1,145 @@
+@charset "UTF-8";/* 
+본문은 14~17px가 많이 쓰인다. 글씨 줄이자
+font-xs: 0.75rem  12px
+font-sm: 0.875rem 14px
+font-base: 1rem   16px
+font-lg: 1.125rem 18px
+font-xl: 1.25rem  20px  
+*/
+
+/* 메인 레이아웃 그리드  */
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1024px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  font-size: 0.75rem;
+  padding-top: 50px;
+}
+/* 공통 css */
+/* 제목 단 */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left:30px ;
+  border-left: solid gray;
+}
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+/* 부부제목 */
+.subsubtitle {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+/* 부부부제목 */
+.texttitle {
+  font-weight: bold;
+}
+
+
+/* 필드셋 경계선 */
+.fieldtype {
+  border-style: none;
+  padding-left: 50px;
+}
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+/* 공통 css 끝 */
+
+/* 직업 추천 css 시작*/
+
+/* 전체 감싸는 클래스 공통 글꼴 줄수 있다. */
+.textarea {
+  font-size: 1rem;
+
+  padding: 50px 50px;
+
+}
+.intextarea{
+  padding: 30px 50px;
+}
+
+/* 3단 텍스트 레이아웃 */
+.inintextarea {
+  padding-left: 30px;
+}
+/* 리스트 인라인 블록으로 */
+.testlist li{
+  display: inline-block;
+  padding-left: 20px;
+}
+
+/* 결과보기 버튼 */
+.submitbutton {
+  font-size: 1.25rem;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  color: white;
+  background-color: rgb(54, 82, 168);
+  border: none;
+  font-weight: bold;
+}
+/* 왼쪽 패딩 texttitle 테이블 위 제목용 */
+.tableTitle {
+  padding-left: 165px;
+}
+
+/* 검사항목 문항마다 테이블 */
+.testTable {
+  border-collapse: collapse;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.testTable th{
+  border: solid 1px white;
+  background-color: #4f718f;
+  color: white;
+  height: 50px;
+  width: 300px;
+}
+
+.testTable td{
+  background-color:rgb(235, 235, 235);
+  height: 70px;
+  padding-left: 20px;
+  font-size: 0.875rem;
+}
+
+/* *색깔 */
+.blue {
+  color: rgb(54, 82, 168);
+  font-weight: bold;
+}
+

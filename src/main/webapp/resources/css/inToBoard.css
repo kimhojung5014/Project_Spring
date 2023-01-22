@@ -1,0 +1,180 @@
+@charset "utf-8";
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1023px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+/*   font-size: 0.75rem; */
+  padding-top: 50px;
+}
+/* 공통 css */
+/* 제목 단 */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left: 20px;
+  border-left: 4px solid gray;
+
+}
+
+
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+/* 부부제목 */
+.subsubtitle {
+  font-size: 1.25rem;
+  background-color: rgb(167, 164, 164);
+  color: white;
+  padding-left: 20px;
+  border-radius: 10px;
+
+}
+/* 부부부제목 */
+.texttitle {
+  font-weight: bold;
+}
+/* 필드셋 경계선 */
+
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+/* 공통 css 끝 */
+
+/* 직업 추천 css 시작*/
+
+/* 전체 감싸는 클래스 공통 글꼴 줄수 있다. */
+.textarea {
+  font-size: 1rem;
+
+  padding: 30px 30px;
+
+}
+.textareaContent{
+  border: solid 1px gray;
+  min-height: 200px;
+  padding: 10px ;
+}
+
+
+/* 댓글 제목 */
+
+
+/* 댓글 칸 구성 */
+
+
+/* 3단 텍스트 레이아웃 */
+.intextarea {
+  padding: 30px 30px;
+
+}
+
+/* 결과보기 버튼 */
+.submitbutton {
+  width: 100px;
+  line-height: 40px;
+  border-radius: 20px;
+  color: white;
+  background-color: rgb(54, 82, 168);
+  border: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 글작성 CSS */
+
+/* 카테고리 CSS */
+
+
+/* input ,select{ */
+/*   width: 100%; */
+/*   height: 30px; */
+/*   border: solid silver 1px; */
+/*   border-radius: 5px; */
+/*   padding-left: 10px; */
+/* } */
+#titleList {
+  text-align: right;
+
+}
+#titleList li{ 
+
+	display: inline-block;
+}
+
+/* 수정 버튼 */
+.editButton {
+	display : inline-block;
+	border: none;
+	background: #ff8000;
+	color: white;
+	font-size: 1rem;
+	border-radius: 20px;
+	font-weight: bold;
+	width: 70px;
+    line-height: 30px;
+}
+/* 삭제버튼 */
+.deleteButton {
+	display : inline-block;
+	border: none;
+	background: red;
+	color: white;
+	font-size: 1rem;
+	border-radius: 20px;
+	font-weight: bold;
+	width: 70px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.comment{
+
+  border-spacing: 10px 10px;
+}
+
+/* 대댓글 */
+.reply{
+  display: none;
+
+  border-spacing: 10px 10px;
+}
+
+.reply textarea{
+	padding-left:10px;
+	font-size:1rem;
+}
+
+
+/*텍스트 에어리어 고정 */
+textarea {
+  font-size:1rem;
+  resize: none;
+}

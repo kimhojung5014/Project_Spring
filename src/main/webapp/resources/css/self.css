@@ -1,0 +1,111 @@
+@charset "UTF-8";
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1024px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  padding-top: 50px;
+}
+.textarea {
+  font-size: 1rem;
+
+  line-height: 40px;
+
+  padding: 50px 50px;
+
+}
+/* 나에게 맞는 학과 칸에 제목 단 스타일 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.blueList {
+
+  list-style-type: disc;
+  padding-left: 10%;
+
+  /* border-radius: 10px; */
+
+  font-weight: bold;
+
+}
+
+.blueList li {
+  line-height: 50px;
+}
+
+.blueList li:nth-child(even){
+  color:  rgb(76, 111, 219);
+}
+
+.blueList li:nth-child(odd){
+  color:rgb(54, 82, 168);
+}
+
+/* 리스트 설정 inline-block로해야 뭔가 정리 된다. */
+.re{
+    display: block;
+    padding: 0 50px;
+  }
+
+
+.re li {
+  /* 칸 크기  */
+  list-style-type: disc;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 60px;
+  /* padding-left: 20px; */
+  /* padding-left: 20%; */
+  text-align: left;
+  /* letter-spacing: 0.1rem; */
+}
+
+.oncenter {
+  text-align: center;
+}
+
+
+/* 리스트 설정 끝  */
+
+/* 폼 버튼 스타일 결과보기 다시하기 용 */
+.submitbutton {
+  font-size: 1.125rem;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  color: white;
+  background-color: rgb(54, 82, 168);
+  border: none;
+  font-weight: bold;
+}
+button:hover {
+  background-color:#aaa;
+  font-size: 1.4rem;
+}
+/* 버튼 스타일 결과보기 다시하기 끝 */
+
+/*  나에게 맞는 학과 스타일*/
+
+/* 나에게 맞는 학위 취득 방법 스타일*/
+
+
+
+/* 메인 레이아웃 끝 */

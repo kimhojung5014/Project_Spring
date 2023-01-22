@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* 메인 레이아웃 그리드  */
+/* 메인 레이아웃 그리드  */
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr) 700px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  ". mainContent ."; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  padding-top: 50px;
+
+  text-align: center;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left:30px ;
+
+}
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+}
+/* 부부제목 */
+.subsubtitle {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+/* 부부부제목 */
+.texttitle {
+  font-weight: bold;
+}
+/* 필드셋 경계선 */
+.fieldtype {
+  border-style: none;
+  padding-left: 50px;
+}
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+
+#login {
+  border-collapse: collapse;
+
+  width: 100%;
+
+}
+
+#login td{
+  height: 50px;
+  width: 200px;
+  
+}
+
+#login h2{
+  font-size: 1.3rem;
+
+  font-weight: bold; 
+}
+
+.textleft{
+  text-align: left;
+  padding-left: 60px;
+}
+
+#login input{
+  width: 300px;
+
+  height: 50px;
+
+  font-size: 1rem;
+
+  text-align: center;
+
+  border-radius: 10px;
+
+  border: solid 1px rgb(170, 170, 170);
+}
+
+
+
+
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color:rgb(76, 111, 219);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  /* width: 400px; */
+}
+
+
+
+/* 폼 버튼 스타일 결과보기 다시하기 용 */
+.button {
+
+  background-color:rgb(76, 111, 219);
+  border-style: none;
+  border-radius: 20px;
+  width: 150px;
+  line-height: 50px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.button a {
+  color: white;
+}
+
+
+button:hover {
+  background-color:#aaa;
+  font-size: 1.4rem;
+}
+
+
+
