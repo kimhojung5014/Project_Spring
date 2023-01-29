@@ -12,7 +12,7 @@ public class ReplyTotalServiceImpl implements ReplyTotalService{
 	IReplyRepository replyRepository;
 	
 	@Override
-	public int replyTotal() {
-		return replyRepository.replyTotal();
+	public int replyTotal(int writeNum) {
+		return replyRepository.replyTotal(writeNum);
 	}
 }

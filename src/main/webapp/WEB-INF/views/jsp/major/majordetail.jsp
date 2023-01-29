@@ -8,11 +8,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/majorresult.css"> 
-  <link rel="stylesheet" href="css/header_footer.css">
+  <link rel="stylesheet" href="resources/css/majorresult.css"> 
+  <link rel="stylesheet" href="resources/css/header_footer.css">
   <title>학과 정보 화면</title>
 </head>
 <body>
+<script src="resources/js/jquery-3.6.3.min.js"></script>
+<script src="resources/js/majortab.js?1"></script>
    <!-- 헤더 부분 -->
   <header id="headerstyle">
     <div id="titleHome">
@@ -58,19 +60,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -121,12 +120,18 @@
   <!-- 헤더 끝 -->
 
   <!-- 메인 부분 -->
-  <main>
   <div id="mainStyle">
     <div id="mainContent">
       <div class="textarea">
       <p class="title">대학교: <span style="color:rgb(54, 82, 168);">${majorDto.major}</span></p>
-      <br>
+   
+      <div class="tab">
+      		<button type="button" class="tab" onclick="view1()">학과 정보</button>
+      		<button type="button" class="tab" onclick="view2()">개설대학</button>
+      		<button type="button" class="tab" onclick="view3()">학과 전망</button>
+      </div>
+      <!-- 학과 정보 -->
+      <div id="view1">
       <p class="subtitle">학과 정보</p>
         <div class="intextarea">
           <p class="subsubtitle">학과 개요</p>
@@ -152,70 +157,649 @@
 
           <p class="subsubtitle">관련 고교 교과목</p>
           <ul class="jobExplainList">
-            <c:forEach var="subject_name" items="${fn:split(majorDto.subject_name,',') }" >
-            <c:forEach var="subject_description" items="${fn:split(majorDto.subject_description,',') }">
+  			<!-- 아래 폴문 전부 set으로 리스트 받고 for문 인덱스로 처리하면 빨라진다. -->
+            <c:forEach var="subject_name" items="${fn:split(majorDto.subject_name,'@') }" varStatus="i">
+            <c:forEach var="subject_description" items="${fn:split(majorDto.subject_description,'@') }" varStatus="j">
+            <c:if test="${i.index eq j.index}">
+              <c:if test="${!i.last }">
             <li>
-
-            
-
               <p class="texttitle">${subject_name}</p>
-              ${subject_description}
+             					   -${subject_description}
+           
             </li>
+              </c:if>
+           <c:if test="${i.last }">
+           <i style="text-decoration:underline;">${subject_name}</i>
+           </c:if>
+            </c:if>
+              
              </c:forEach>
             </c:forEach>
           </ul>
+          
           <p class="subsubtitle">진로 탐색 활동</p>
           <ul class="jobExplainList">
-<%--           <c:forEach var="subject_name" items="${fn:split(majorDto.subject_description,',') }">  --%>
+          <c:forEach var="act_name" items="${fn:split(majorDto.act_name,'@<br>') }" varStatus="i"> 
+          <c:forEach var="act_description" items="${fn:split(majorDto.act_description,'@') }" varStatus="j">
+          <c:if test="${i.index eq j.index}">
             <li>
-            
+			   <p class="texttitle">${act_name}</p>
+			   <c:if test="${act_description ne 'null'}">
+             					   -${act_description}
+				</c:if>
+				<c:if test="${act_description eq 'null'}">
+             					  
+				</c:if>
             </li>
-<%--            </c:forEach> --%>
+            </c:if>
+           </c:forEach>
+           </c:forEach>
           </ul>
+          
           <p class="subsubtitle">대학 주요 교과목</p>
           <ul class="jobExplainList">
+          <c:forEach var="SBJECT_NM" items="${fn:split(majorDto.SBJECT_NM,'@') }" varStatus="i"> 
+          <c:forEach var="SBJECT_SUMRY" items="${fn:split(majorDto.SBJECT_SUMRY,'@') }" varStatus="j">
+          <c:if test="${i.index eq j.index}">
             <li>
-              <p class="texttitle">운영체제</p>
-              각종 운영체제에 대해서 구체적인 구조와 구성, 작동원리, 각종 문제를 해결하기 위한 방법을 배웁니다.
+              <p class="texttitle">${SBJECT_NM}</p>
+              					   ${SBJECT_SUMRY}
             </li>
-            <li>
-              <p class="texttitle">소프트웨어 공학</p>
-              소프트웨어 개발의 일반적 과정 및 개발 방법론, 프로젝트 관리와 계획, 요구사항 분석, 각종 개발 모델링 및 소프트웨어 설계 등 전반적인 이론을 배우고 실습을 합니다.
-            </li>
-      
+            </c:if>
+           </c:forEach>
+           </c:forEach>
           </ul>
           
           <p class="subsubtitle">관련 자격</p>
           <div class="inintextarea">
-            e-TestProfessional, IEQ(인터넷윤리자격), RFID기술자격검정, SQL, SW테스트전문가(CSTS), 네트워크관리사, 데이터분석, 데이터아키텍처, 디지털정보활용능력(DIAT), 디지털포렌식전문가, 리눅스마스터, 소프트웨어자산관리사(C-SAM), 정보기술자격(ITQ)시험, 정보기술프로젝트관리전문가(IT-PMP), 정보시스템감리사, 정보처리기사, 정보통신기사, 컴퓨터활용능력
+           ${majorDto.qualifications}
           </div>
           <p class="subsubtitle">관련 직업</p>
       
           <div class="inintextarea">
-            3D프린팅전문가, 가상현실전문가 , 네트워크엔지니어 , 데이터베이스개발자, 디지털포렌식수사관, 모바일애플리케이션개발자, 무인자동차엔지니어, 무인항공기시스템개발자, 반도체공학기술자 , 블록체인전문가, 빅데이터전문가, 사물인터넷전문가, 사이버교육운영자 , 생체인식전문가, 스마트팜구축가, 시스템소프트웨어개발자 , 신경회로망연구원 , 아이티(IT)교육강사 , 응용소프트웨어개발자, 의료정보시스템개발자 , 인공지능전문가, 정밀농업기사, 정보보호전문가 , 컴퓨터시스템감리전문가, 컴퓨터프로그래머, 컴퓨터하드웨어기술자및연구원, 클라우드시스템엔지니어, 통신공학기술자및연구원, 홀로그램전문가
+          <!-- 여기는 직업 있는 것, 없는 것 있으니 if 문으로 a 태그 걸기 -->
+           <c:forEach var="job" items="${fn:split(majorDto.job,',') }" varStatus="i"> 
+           <c:if test="${!i.last }">
+          	<a class="link" href="jobDetail?job=${fn:trim(job)}">${job},</a>
+           </c:if>
+            <c:if test="${i.last }">
+          	<a class="link" href="jobDetail?job=${fn:trim(job)}">${job}</a>
+           </c:if>
+           </c:forEach>
           </div>
 
           <p class="subsubtitle">졸업 후 진출 분야</p>
           <ul class="jobExplainList">
+          <c:forEach var="gradeuate" items="${fn:split(majorDto.gradeuate,'@') }" varStatus="i"> 
+          <c:forEach var="description" items="${fn:split(majorDto.description,'@') }" varStatus="j">
+          <c:if test="${i.index eq j.index}">
             <li>
-              <p class="texttitle">기업 및 산업체</p>
-              시스템 소프트웨어 개발 회사, 게임 개발 회사, 모바일 웹 및 앱 개발 회사, 홈페이지 제작 및 기획 운영 회사, 정보 시스템 운영 및 개발 회사, 정보 통신 및 네트워크 관련 회사, 무인 자동차 개발 회사, 컴퓨터 및 IT 분야 회사
+              <p class="texttitle">${gradeuate}</p>
+              					   ${description}
             </li>
-            <li>
-              <p class="texttitle">학계 및 연구기관</p>
-              한국전자통신연구원, 정보통신정책연구원 등 공공 및 민간 연구기관
-            </li>
-            <li>
-              <p class="texttitle">정부 및 공공기관</p>
-              과학기술정보통신부 등 정부 및 지방자치단체 공무원, 한국정보화진흥원, 한국인터넷진흥원, 정보통신산업진흥원 등 공공기관
-            </li>
+            </c:if>
+           </c:forEach>
+           </c:forEach>
           </ul>
+
         </div>
+	
       </div>
+     <!-- 학과 정보 끝 -->
+     
+	 <!-- 개설 대학 시작-->
+	 <div id="view2">
+	       <p class="subtitle">개설 대학</p>
+	       
+	       <c:if test="${majorDto.area ne null }">
+	       
+           <table id="univerTable" border="1">
+           <caption class="subsubtitle">대학 목록</caption>
+           <tr>
+           		<th>대학명</th>
+           		<th>지역</th>
+           		<th>학과</th>
+           </tr>
+           <c:set var="area" value="${fn:split(majorDto.area,'@') }"/>
+           <c:set var="schoolURL" value="${fn:split(majorDto.schoolURL,'@') }"/>
+           <c:set var="campus_nm" value="${fn:split(majorDto.campus_nm,'@') }"/>
+           <c:set var="majorName" value="${fn:split(majorDto.majorName,'@') }"/>
+           <c:set var="schoolName" value="${fn:split(majorDto.schoolName,'@') }"/>
+           <c:forEach var="a" begin="0" end="${fn:length(area)}" varStatus="i"> 
+           <c:if test="${schoolURL[i.index] ne null}">
+           <tr>
+           		<td><a id="schoolName" href="${schoolURL[i.index]}" target="_blank">${schoolName[i.index]}(${campus_nm[i.index]})</a></td>
+           		<td>${area[i.index] }</td>
+           		<td>${majorName[i.index] }</td>
+           </tr>
+           </c:if>
+           </c:forEach>
+    
+           </table>
+           
+           </c:if>
+           <c:if test="${majorDto.area eq null }">
+           	 <h3 style="text-align: center;">대학 정보가 없습니다.</h3>
+           </c:if>
+	 </div>
+	 <!-- 개설 대학 끝 -->
+	 
+	 <!-- 학과 전망 시작 -->
+	 <div id="view3">
+ 		<p class="subtitle" >학과 전망</p>
+	 	<table id="chartTable">
+	 		<tr>
+	 			<td><canvas id="myChart1"></canvas></td>
+	 			<td><canvas id="myChart2"></canvas></td>
+	 		</tr>
+	 		<tr>
+	 			<td><canvas id="myChart3"></canvas></td>
+	 		
+	 			<td><canvas id="myChart4"></canvas></td>
+	 		</tr>
+	 		<tr>
+	 			<td>
+	 				<canvas id="myChart5"></canvas>
+	 				<c:set var="salaryItem" value="${fn:split(majorDto.salaryItem,'@')}"/>
+	 				<c:set var="salaryData" value="${fn:split(majorDto.salaryData,'@')}"/>
+
+	 			</td>
+	 			<td><canvas id="myChart6"></canvas></td>
+	 		</tr>
+	 	</table>		
+		
+	 </div>
+	 <!-- 학과 전망 끝 -->
+	</div>
     </div>
   </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!--입학 상황-->
+<script type="text/javascript">
+			const applicantData = "<c:out value='${majorDto.applicantData}'/>";
+			
+			const appli = applicantData.split("@");
+			
+            var context = document
+                .getElementById('myChart1')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'bar', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: ['지원자','입학자'],
+                    
+                    datasets: [
+                        { //데이터
+                            label:[''] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	appli[0],appli[1]
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)'
 
-  </main>
+                            ],
+                          
+                        },
+                 
+                    ],
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '입학 상황',
+					          	          fontSize:16,
+					          	         
+					          	        },
+				                        legend: {
+				                            display: false
+				                        },
+					        			scales: {
+					        				yAxes: [{
+					        					ticks: {
+					        						min: 0,
+					        						max:60000,
+					        						stepSize : 10000,
+					        						fontSize : 14,
+					        					}
+					        				}]
+					        			},
+                	                    plugins: {
+
+                   	                    }  
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			 ,tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+        			animation: {
+        				duration: 1,
+        				onComplete: function () {
+        					var chartInstance = this.chart,
+        						ctx = chartInstance.ctx;
+        					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+        					ctx.fillStyle = 'black'; //글자색
+        					ctx.textAlign = 'center';
+        					ctx.textBaseline = 'bottom';
+
+        					this.data.datasets.forEach(function (dataset, i) {
+        						var meta = chartInstance.controller.getDatasetMeta(i);
+        						meta.data.forEach(function (bar, index) {
+        							var data = dataset.data[index];							
+        							ctx.fillText(data, bar._model.x, bar._model.y - 5);
+        						});
+        					});
+        				}
+        			}
+
+                	                }
+
+                	            });
+            //입학 상황 차트 끝
+  </script>
+  
+<script type="text/javascript">         
+            //취업률
+			const employmentData = "<c:out value='${majorDto.employmentData}'/>";
+			
+			const employment = employmentData.split("@");
+			
+            var context = document
+                .getElementById('myChart2')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'bar', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: ['전체','남자','여자'],
+                    
+                    datasets: [
+                        { //데이터
+                            label:[''] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	employment[0],employment[1],employment[2]
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)'
+
+                            ],
+
+                        },
+                 
+                    ],
+                    
+                    
+
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '취업률',
+					          	        fontStyle:'bold',	
+					          	        fontSize:16,
+					          	        },
+				                        legend: {
+				                            display: false
+				                        },	
+					        			scales: {
+					        				yAxes: [{
+					        					ticks: {
+					        						min: 0,
+					        						max:100,
+					        						stepSize : 20,
+					        						fontSize : 14
+					        					}
+					        				}]
+					        			},
+                	                    plugins: {
+
+                	                    }
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			, tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+        			animation: {
+        				duration: 1,
+        				onComplete: function () {
+        					var chartInstance = this.chart,
+        						ctx = chartInstance.ctx;
+        					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+        					ctx.fillStyle = 'black'; //글자색
+        					ctx.textAlign = 'center';
+        					ctx.textBaseline = 'bottom';
+
+        					this.data.datasets.forEach(function (dataset, i) {
+        						var meta = chartInstance.controller.getDatasetMeta(i);
+        						meta.data.forEach(function (bar, index) {
+        							var data = dataset.data[index];							
+        							ctx.fillText(data, bar._model.x, bar._model.y - 5);
+        						});
+        					});
+        				}
+        			}
+
+                	                }
+
+               });
+            //취업률 끝
+</script>
+
+	<script type="text/javascript">
+           //졸업 후 상황
+			const afterData = "<c:out value='${majorDto.afterData}'/>";
+			
+			const after = afterData.split("@");
+			
+            var context = document
+                .getElementById('myChart3')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'pie', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: ['진학자: '+after[0],'취업자: '+after[1],'기타: '+after[2]],
+                    
+                    datasets: [
+                        { //데이터
+                            label:['진학자'] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	after[0],after[1],after[2]
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+
+                        },
+                 
+                    ],
+                    
+                    
+
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '졸업 후 상황',
+					          	        fontStyle:'bold',
+					          	        fontSize:16,
+					          	        },
+              	                        legend: {
+                  	                            display: true,
+                  								position: 'bottom',
+                  	                        }
+					        			,
+                	                    plugins: {
+
+                	                    }
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			, tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+
+
+                	                }
+
+               });
+</script>
+
+<script type="text/javascript">
+           //졸업 후 상황
+
+			const fieldItem = "<c:out value='${majorDto.fieldItem}'/>";
+			const fieldData = "<c:out value='${majorDto.fieldData}'/>";
+			
+			const Item = fieldItem.split("@");
+			const Data = fieldData.split("@");
+
+            var context = document
+                .getElementById('myChart4')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'pie', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: [
+							Item[0],Item[1],Item[2],Item[3],Item[4],Item[5],Item[6],Item[7],Item[8],Item[9],
+						
+                    ],
+                    
+                    datasets: [
+                        { //데이터
+                            label:[''] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	
+                            Data[0],Data[1],Data[2],Data[3],Data[4],Data[5],Data[6],Data[7],Data[8],Data[9],
+        					
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                'rgb(153, 102, 255)',
+                                'rgb(000, 255, 255)',
+                                'rgba(204, 255, 000)',
+                                'rgba(102, 204, 102)',
+                                'rgba(255, 102, 102)',
+                            ],
+
+                        },
+                 
+                    ],
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '졸업 후 첫 직업분야',
+					          	        fontStyle:'bold',
+					          	      	fontSize:16,
+					          	        },
+              	                        legend: {
+                  	                            display: true,
+                  								position: 'bottom',
+                  	                        }
+					        			,
+                	                    plugins: {
+
+                	                    }
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			, tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+
+
+                	                }
+
+               });
+</script>
+
+<script type="text/javascript">
+           //졸업 후 상황
+
+			const salaryItemList = "<c:out value='${majorDto.salaryItem}'/>";
+			const salaryDataList = "<c:out value='${majorDto.salaryData}'/>";
+			
+			const salaryItem = salaryItemList.split("@");
+			const salaryData = salaryDataList.split("@");
+
+            var context = document
+                .getElementById('myChart5')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'pie', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: [
+                    	salaryItem[1],salaryItem[2],salaryItem[3],salaryItem[4],salaryItem[5],
+						
+                    ],
+                    
+                    datasets: [
+                        { //데이터
+                            label:[''] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	
+                            	salaryData[1],salaryData[2],salaryData[3],salaryData[4],salaryData[5],
+        					
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                
+                            ],
+
+                        },
+                 
+                    ],
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '졸업 후 첫 직장 월 평균 임금: '+salaryData[0]+'만원',
+					          	        fontStyle:'bold',
+					          	      	fontSize:16,
+					          	        },
+              	                        legend: {
+                  	                            display: true,
+                  								position: 'bottom',
+                  	                        }
+					        			,
+                	                    plugins: {
+
+                	                    }
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			, tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+
+
+                	                }
+
+               });
+</script>
+<script type="text/javascript">
+           //졸업 후 상황
+
+			const satisfactionItemList = "<c:out value='${majorDto.satisfactionItem}'/>";
+			const satisfactionDataList = "<c:out value='${majorDto.satisfactionData}'/>";
+			
+			const satisfactionItem = satisfactionItemList.split("@");
+			const satisfactionData = satisfactionDataList.split("@");
+
+            var context = document
+                .getElementById('myChart6')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'pie', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: [
+                    	satisfactionItem[0],satisfactionItem[1],satisfactionItem[2],satisfactionItem[3],satisfactionItem[4],
+						
+                    ],
+                    
+                    datasets: [
+                        { //데이터
+                            label:[''] , //차트 제목
+                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                            data: [ //x축 label에 대응되는 데이터 값
+                            	
+                            	satisfactionData[0],satisfactionData[1],satisfactionData[2],satisfactionData[3],satisfactionData[4],
+        					
+                          
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                
+                            ],
+
+                        },
+                 
+                    ],
+                },
+                                options: {
+                						//제목 부분
+					                    title: {
+					          	          display: true,
+					          	          text: '첫 직장 만족도',
+					          	        fontStyle:'bold',
+					          	      	fontSize:16,
+					          	        },
+              	                        legend: {
+                  	                            display: true,
+                  								position: 'bottom',
+                  	                        }
+					        			,
+                	                    plugins: {
+
+                	                    }
+					        			
+// 					      값 고정으로 뜨게하는 부분 
+        			, tooltips: {
+        				enabled: true //마우스 올렸을 시 값 나오는 지 여부
+        			},
+        			hover: {
+        				animationDuration: 0
+        			}
+        			,
+
+
+                	                }
+
+               });
+</script>
 <!-- 메인  끝-->
 
   <!-- 푸터 -->

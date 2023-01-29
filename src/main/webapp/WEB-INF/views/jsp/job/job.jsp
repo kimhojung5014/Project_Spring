@@ -61,19 +61,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -269,14 +266,14 @@
          </div>
     
           <div class="oncenter">
-            <!-- 링크 a는 임시보 해놈 form처리해줄 jsp가 없으니 -->
+            
             <button type="button" class="submitbutton" onclick="check()">결과보기</button>
           </div>
         </form>
         </div>
 
         <div class="title">
-          <p >직업 정보</p>
+          <p >직업 정보 총 ${pageMaker.total }건</p>
         </div>
         <br>
         <!-- 데이터 끌어와서 리스트로 보여주는 화면 나중에 JSP로 직접 입력 말고 데이터 끌고오자 -->

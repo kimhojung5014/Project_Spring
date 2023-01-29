@@ -113,12 +113,17 @@ font-xl: 1.25rem  20px
   border: none;
   font-weight: bold;
 }
+.submitbutton:hober {
+ 
+  background-color: silver;
+
+}
 
 
-/* 여기서부턴 아래 쪽 직업 정보 출력 css */
+/* 여기서부턴 아래 쪽 학과 정보 출력 css */
 .rowLine {
-  height: 160px;
-
+  height:auto;
+  padding-top:10px;
 }
 /* 표에서 직업이름 행  */
 .listHeadLine{
@@ -131,6 +136,10 @@ font-xl: 1.25rem  20px
   display: inline-block;
   width:650px;
 }
+.listJobName a:hover {
+  color:purple;
+   text-decoration:underline;
+}
 /* 직업 칸에서  연봉, 발전 가능성 , 고용평등*/
 .listJobEtc {
   display: inline-block;
@@ -138,13 +147,14 @@ font-xl: 1.25rem  20px
 }
 .listJobEtcColor {
   color: rgb(76, 111, 219);
+	font-weight: bold;
 }
 
 /* 직업에서 아래칸 설명 부분 */
 .listJobExplain {
-  height: 100px;
+
   line-height: 20px;
-  padding: 5px 20px 0px ;
+  padding: 10px 20px;
 }
 /* 직업 정보 css 끝 */
 /* 직업 정보 아래쪽 페이지 번호 */
@@ -152,4 +162,27 @@ font-xl: 1.25rem  20px
   display: inline-block;
   font-size: 1rem;
   width: 20px;
+}
+
+#uni{
+	display: inline-block;
+	border: gray;
+	border-radius: 5px;
+	 color: rgb(76, 111, 219);
+}
+
+#chartTable {
+	width: 100%;
+	border-spacing: 0 20px;
+}
+
+
+#chartTable td{
+	width: 50%;
+	height: auto;
+}
+
+.major:hover{
+  color:purple;
+   text-decoration:underline;
 }

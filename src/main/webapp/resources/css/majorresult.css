@@ -102,3 +102,67 @@ font-xl: 1.25rem  20px
   list-style-type: disc;
   padding-left: 50px;
 }
+
+#univerTable {
+	width: 100%;
+	border-collapse: collapse;
+	border:white;
+	
+}
+#univerTable th{
+	padding-left: 10px;
+	background: #417bed;
+	color:white
+}
+#univerTable td{
+	 text-align: center;
+	background:#f0f3fd
+	
+}
+
+#schoolName:hover {
+	color:purple;
+	font-weight: bold;
+}
+
+#chartTable {
+	width: 100%;
+	border-spacing: 0 20px;
+}
+
+
+#chartTable td{
+	width: 50%;
+	height: auto;
+}
+
+
+
+#view2{
+	display: none;
+	
+}
+#view3{
+	display: none;
+}
+.tab{
+	text-align: center;
+}
+.tab button{
+	width:150px;
+	line-height:40px;
+	font-size: 1.25rem;
+	border-radius:5px;
+	border:none;
+	font-weight:bold;
+	background: #587dec;
+	color:white;
+}
+.tab button:hover{
+	background-color:silver;
+}
+
+.link:hover{
+  color:purple;
+   text-decoration:underline;
+}

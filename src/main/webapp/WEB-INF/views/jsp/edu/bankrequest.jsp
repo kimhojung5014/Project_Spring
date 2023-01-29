@@ -7,8 +7,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/header_footer.css">
-  <link rel="stylesheet" href="css/bankrequest.css"> 
+  <link rel="stylesheet" href="resources/css/header_footer.css">
+  <link rel="stylesheet" href="resources/css/bankrequest.css"> 
   <title>학점은행제 신청 페이지</title>
 </head>
 <body>
@@ -130,7 +130,7 @@
           
           <div class="textarea">
             <p class="title">신청 절차</p>
-            <img src="image/학점등록.png" alt="" width="100%">
+            <img src="resources/image/학점등록.png" alt="" width="100%">
             <br><br>
             <p class="title">신청기간 및 방법</p>
             <br>
@@ -213,7 +213,7 @@
                 <br>
                 <p style="text-align: center;"><i>2022.10.04(화) 10:00:00 ~ 2022.10.31(월) 18:00:00</i></p>
                 <br>
-                <img src="image/학습자등록,취소.png"width="100%" alt="">
+                <img src="resources/image/학습자등록,취소.png"width="100%" alt="">
                 <br><br>
                 <div class="textarea">
           

@@ -7,8 +7,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/header_footer.css">
-  <link rel="stylesheet" href="css/knou.css"> 
+  <link rel="stylesheet" href="resources/css/header_footer.css">
+  <link rel="stylesheet" href="resources/css/knou.css"> 
   <title>방송통신대학 소개 페이지</title>
 </head>
 <body>
@@ -57,19 +57,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->

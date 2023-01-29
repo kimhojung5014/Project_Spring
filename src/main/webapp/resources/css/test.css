@@ -61,6 +61,7 @@ font-xl: 1.25rem  20px
 /* 부부부제목 */
 .texttitle {
   font-weight: bold;
+  text-align: center;
 }
 
 
@@ -82,6 +83,7 @@ font-xl: 1.25rem  20px
   font-size: 1rem;
 
   padding: 50px 50px;
+   
 
 }
 .intextarea{
@@ -110,14 +112,12 @@ font-xl: 1.25rem  20px
   font-weight: bold;
 }
 /* 왼쪽 패딩 texttitle 테이블 위 제목용 */
-.tableTitle {
-  padding-left: 165px;
-}
+
 
 /* 검사항목 문항마다 테이블 */
 .testTable {
   border-collapse: collapse;
-  width: 600px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -143,3 +143,10 @@ font-xl: 1.25rem  20px
   font-weight: bold;
 }
 
+#member{
+	
+	margin: auto;
+	border-spacing: 20px;
+	border: solid 1px;
+	border-radius: 20px;
+}

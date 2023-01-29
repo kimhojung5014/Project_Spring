@@ -59,19 +59,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -187,7 +184,7 @@
 		       		<tr>
 		       			<td><b>${userData.nickName}</b></td>
 		       			
-		       			<td><textarea name="content" id="replyContent" rows="2" cols="83" required="required"></textarea></td>
+		       			<td><textarea style="padding-left: 10px;" name="content" id="replyContent" rows="3" cols="83" required="required"></textarea></td>
 		       			
 		       			<td><button type="button" onclick = "replyInsert()">댓글달기</button></td>
 		       		</tr>
@@ -198,11 +195,20 @@
 				<!--댓글 반복문 페이지번호에 있는 댓글 전부 출력  -->
     		    <c:forEach var="reply" items="${replyList}" varStatus="status">
 		        	<table class="comment">
-		           		<tr>
-<%-- 		           			<th>${reply.nickName}</th>  --%>
-		           			<th>${fn:replace(reply.nickName, '-', 'ㄴ')}</th> 
+							<tr>
+		           			<th>
+							<c:if test="${reply.parentNum ne 0 }">
+								<c:forEach var="parent" items="${replyList}" >
+									<c:if test="${parent.commentNum eq reply.parentNum }">
+										<p>&nbsp;&nbsp;&nbsp;<b style="color: silver;">@${parent.nickName }</b></p>
+									</c:if>
+								</c:forEach>
+							</c:if>
+		           			${ reply.nickName}
+		           			</th>
+
 						<!-- 글 속성을 input readonly로 해서 값 불러오고 수정시 readonly 풀며 될 듯 -->
-		           			<td><input style="border: none;" type="text" name="replyContent" readonly="readonly" value="${reply.content}"></td>
+		           			
 		           			<td>${reply.commentDate}</td>
 						<!--로그인 해야만 답글달기 버튼 활성화 -->
 		           		<c:if test="${userData ne null }">
@@ -215,6 +221,24 @@
 							<td><button class="deleteButton" onclick="chooseDelete(${reply.commentNum},${boardVo.writeNum})">삭제</button></td>
 						</c:if>
 						</tr>
+						<c:if test="${reply.parentNum ne 0 }">
+						<tr>
+						<td colspan="3" style="padding-left: 30px; ">
+
+							<textarea style="border: none; padding-left: 20px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+						</td>
+						
+						</tr>
+						</c:if>
+						<c:if test="${reply.parentNum eq 0 }">
+						<tr >
+						<td colspan="3" >
+
+							<textarea style="border: none; padding-left: 25px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+						</td>
+						
+						</tr>
+						</c:if>
 					</table>
 
 						<!-- 대댓글 작성 부분 버튼 누르면 활성화, 현재 name 배열 설정 안잡아서 맨 위에 글로 날아감 -->
@@ -230,7 +254,7 @@
 									<input type="hidden" name="parentNum" value="${reply.commentNum }">
 									<input type="hidden" name="writeNum" value="${boardVo.writeNum}">
 									<!--  날짜는 객체 매핑하려고 보냄 -->
-			               				<textarea name="content" class="recontent"  required="required" maxlength="300" rows="2" cols="83"></textarea>
+			               				<textarea name="content" class="recontent"  required="required" maxlength="1000" rows="2" cols="83" ></textarea>
 										<!-- 글자수 체크 메소드 실행시 폼 서밋을 js 에서 못하는 경우가 생겨서 일단 maxlength로 글자 제한 검 -->
 					              		<button type="button" onclick="rereplyInsert(${status.index})">완료</button>
 		           					</form>

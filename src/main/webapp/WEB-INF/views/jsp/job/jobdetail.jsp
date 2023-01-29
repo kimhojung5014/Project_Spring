@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="resources/css/jobdetail.css"> 
+  <link rel="stylesheet" href="resources/css/jobdetail.css?1"> 
   <link rel="stylesheet" href="resources/css/header_footer.css">
   <title>직업 상세 정보 화면</title>
 </head>
@@ -59,19 +59,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -126,7 +123,6 @@
     <div id="mainContent">
       <div class="textarea">
       <p class="title">직업정보: <span style="color:rgb(54, 82, 168);">${jobData.job }</span></p>
-      <br>
       <p class="subtitle">직업개요</p>
       <div class="intextarea">
       
@@ -136,14 +132,14 @@
           <p>${jobData.ability }</p>
           </div>  
 	  </c:if>
-	  <br>
+	  
 	  <c:if test="${jobData.similarJob ne null}">
           <p class="subsubtitle">유사 직업명</p>
           <div class="inintextarea">
           <p>${jobData.similarJob }</p>
           </div>
  	  </c:if>
- 	  <br>
+ 	  
  	  <c:if test="${jobData.major ne null}">
           <p class="subsubtitle">관련학과</p>
           <div class="inintextarea">
@@ -151,13 +147,13 @@
             <c:set var="majorlist" value="${fn:split(jobData.major,'과') }"></c:set>
 				 
 			  <c:forEach var="major" items="${majorlist }" varStatus="i">
-			  <c:if test="${!i.last}">${major}과, </c:if>
-			  <c:if test="${i.last}">${major}과</c:if>	 
+			  <c:if test="${!i.last}"><a class="link" href="majorDetail?major=${fn:trim(major)}과">${major}과,</a></c:if>
+			  <c:if test="${i.last}"><a class="link" href="majorDetail?major=${fn:trim(major)}과">${major}과</a></c:if>	 
 			  </c:forEach>
           
           </div>
 	  </c:if>
- 	  <br>
+	  
  	  <c:if test="${jobData.capacity ne null}">
           <p class="subsubtitle">관련자격</p>
           <div class="inintextarea">
@@ -171,7 +167,6 @@
           
           </div>
 	  </c:if>
-	  <br>
           <p class="subsubtitle">하는일</p>
           <ul class="jobExplainList" >
             <c:set var="summarylist" value="${fn:split(jobData.summary,'-') }"></c:set>
@@ -179,7 +174,7 @@
 				 <li>${summary}</li>
 			  </c:forEach>
           </ul>
-      <br>
+          
 	  <c:if test="${jobData.aptitude ne null}">
           <p class="subsubtitle">적성 및 흥미</p> 
           <ul class="jobExplainList" >
@@ -189,7 +184,7 @@
 			  </c:forEach>
           </ul>
       </c:if>      
-	  <br>       
+      
       <p class="subsubtitle">준비방법</p>
 	  <c:if test="${jobData.preparation ne null}">
           <p class="texttitle">정규 교육과정</p> 
@@ -207,7 +202,7 @@
           ${jobData.certification}
           </div>
       </c:if>
-	<br>      
+      
       <p class="subsubtitle">취업현황</p>
 	  <c:if test="${jobData.similarJob ne null}">
           <p class="texttitle">입직 및 취업방법</p>
@@ -228,7 +223,7 @@
           ${jobData.salery}
           </div>
 	  </c:if>
-	<br>
+	  
 	<c:if test="${jobData.reward ne null }">
 		<p class="subsubtitle" >직업 전망</p>	
 		<br>
@@ -236,7 +231,7 @@
 			<!--차트가 그려질 부분-->
 			<canvas id="myChart"></canvas>
 		</div>
-		<br>
+		
 			<p class="texttitle">직업 전망 설명</p>
 	          <ul class="jobExplainList" >
 	            <c:set var="possibilitylist" value="${fn:split(jobData.possibility,'-') }"></c:set>
@@ -246,6 +241,13 @@
 	          </ul>
 	    
 	</c:if>
+
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
             var context = document
@@ -261,19 +263,19 @@
                         '${jobData.developmentPossibility}',
                         '${jobData.workingConditions}',
                         '${jobData.professional}',
-                        '${jobData.equalEmployment}'
+                        '${jobData.equalEmployment}',
                     ],
                     datasets: [
                         { //데이터
                             label:[''] , //차트 제목
                             fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
                             data: [ //x축 label에 대응되는 데이터 값
-                            	${jobData.rewardValue},
-                            	${jobData.employmentsecurityvalue},
-                            	${jobData.developmentPossibilityValue},
-                            	${jobData.workingConditionsValue},
-                            	${jobData.professionalValue},
-                            	${jobData.equalEmploymentValue}
+                            	'${jobData.rewardValue}',
+                            	'${jobData.employmentsecurityvalue}',
+                            	'${jobData.developmentPossibilityValue}',
+                            	'${jobData.workingConditionsValue}',
+                            	'${jobData.professionalValue}',
+                            	'${jobData.equalEmploymentValue}',
                             ],
                             backgroundColor: [
                                 //색상
@@ -282,7 +284,7 @@
                                 'rgba(255, 206, 86, 0.2)',
                                 'rgba(75, 192, 192, 0.2)',
                                 'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                'rgba(255, 159, 64, 0.2)',
                             ],
                             borderColor: [
                                 //경계선 색상
@@ -291,7 +293,7 @@
                                 'rgba(255, 206, 86, 1)',
                                 'rgba(75, 192, 192, 1)',
                                 'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(255, 159, 64, 1)',
                             ],
                             borderWidth: 1 //경계선 굵기
                         }
@@ -352,12 +354,6 @@
 
                 	            });
         </script>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
 <!-- 메인  끝-->
 
   <!-- 푸터 -->

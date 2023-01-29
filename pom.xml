@@ -15,13 +15,15 @@
 		<org.apache.tiles-version>3.0.3</org.apache.tiles-version>
 	</properties>
 	<dependencies>
-		<!-- simple Json -->
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
-		</dependency>
 
+        
+		<!-- simple Json -->
+
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
 		<!-- Tiles 타일즈 일단 보류-->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>

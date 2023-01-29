@@ -31,7 +31,7 @@ public class ReplyRepository implements IReplyRepository{
 			replyVo.setContent(rs.getString("content"));
 			replyVo.setCommentDate(rs.getString("commentdate"));
 			replyVo.setCommentNum(rs.getInt("commentNum"));
-			
+			replyVo.setstep(rs.getInt("step"));
 			return replyVo;
 		}
 		
@@ -50,9 +50,17 @@ public class ReplyRepository implements IReplyRepository{
 //	}
 	
 	//페이징 처리용
+//	@Override
+//	public List<ReplyVo> replyList(int writeNum, Criteria cri) {
+//		String sql = "select step,nickname, content, commentnum,commentdate, userid,parentnum  from(select ROWNUM rn,LPAD(' ', level,'-') || nickname as nickname,content,commentnum,userid,parentnum,commentdate  from reply where writenum = ? start with parentnum = 0  connect by prior commentnum = parentnum) where rn BETWEEN ? and ?";
+//		return jdbc.query(sql, new ReyplyMapper(),
+//						 writeNum,
+//						((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 (1-1) * 10 = 0이고 + 1 하면 1 항상 1,11,21같이 시작해야 해서 +1
+//						  cri.getPageNum() * cri.getAmount()); //페이지 * 10 해주면 된다.
+//	}
 	@Override
 	public List<ReplyVo> replyList(int writeNum, Criteria cri) {
-		String sql = "select nickname, content, commentnum,commentdate, userid,parentnum  from(select ROWNUM rn,LPAD(' ', level,'-') || nickname as nickname,content,commentnum,userid,parentnum,commentdate  from reply where writenum = ? start with parentnum = 0  connect by prior commentnum = parentnum) where rn BETWEEN ? and ?";
+		String sql = "select step,nickname, content, commentnum,commentdate, userid,parentnum  from(select ROWNUM rn,level as step,nickname,content,commentnum,userid,parentnum,commentdate  from reply where writenum = ? start with parentnum = 0  connect by prior commentnum = parentnum) where rn BETWEEN ? and ?";
 		return jdbc.query(sql, new ReyplyMapper(),
 						 writeNum,
 						((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 (1-1) * 10 = 0이고 + 1 하면 1 항상 1,11,21같이 시작해야 해서 +1
@@ -85,9 +93,9 @@ public class ReplyRepository implements IReplyRepository{
 	}
 	
 	@Override
-	public int replyTotal() {
-		String sql = "SELECT COUNT(*) FROM REPLY";
-		return jdbc.queryForObject(sql, Integer.class);
+	public int replyTotal(int writeNum) {
+		String sql = "SELECT COUNT(*) FROM REPLY where writeNum= ?";
+		return jdbc.queryForObject(sql, Integer.class,writeNum);
 	}
 	
 	

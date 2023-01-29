@@ -44,8 +44,12 @@ public class JobController {
 	
 	@GetMapping(value = "jobDetail")
 	public String joiDetail(String job, Model model) {
-		
-		model.addAttribute("jobData", jobDetailService.Jobdetail(job));
+		try {
+			model.addAttribute("jobData", jobDetailService.Jobdetail(job));
+			
+		} catch (Exception e) {
+			return "job/errorjob";
+		}
 		
 		return "job/jobdetail";
 	}

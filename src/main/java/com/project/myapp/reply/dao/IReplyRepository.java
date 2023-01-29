@@ -13,6 +13,6 @@ public interface IReplyRepository {
 	
 	public void replyEdit(int num, String content);
 	
-	public int replyTotal();
+	public int replyTotal(int writeNum);
 	
 }

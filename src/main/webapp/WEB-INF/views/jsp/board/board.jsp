@@ -64,19 +64,16 @@
 
         <ul class="main1" >
     <!-- 1번째 메뉴 -->
-            <li><a href="jobList">직업 추천</a></li>
+      		<li><a href="test" id="main1_3" href="test">진로 가치관 검사</a></li>
+            
     <!-- 1번째 메뉴 끝 -->
 
     <!-- 2번째 메뉴 시작 -->
-            <li><a id="main1_2" href="major" >학과 추천</a>   
-             
-            </li>
+            <li><a id="main1_2" href="major" >학과 추천</a></li>
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-            <li><a href="test" id="main1_3" href="#">진로 가치관 검사</a>
-    
-            </li>
+          <li><a href="jobList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -94,7 +91,7 @@
 
                  </ul>
                 </li>
-                 <li><a id="main1_2" href="#" >독학학위제</a>
+                 <li><a id="main1_2" href="test" >독학학위제</a>
                     <ul class="main3">
                       <li><a href="self" >독학학위제 개요</a></li>
                   
@@ -137,7 +134,7 @@
       <br>
       <table class="memuTable">
         <tr>
-        <c:if test="${userData.userId eq 'gytrt0130' }">
+        <c:if test="${userData.userId eq 'master' }">
           <th style="background: red;"><a href="testinsert" style="background: red;">더미 삽입! </a>
           <th style="background: red;"><a href="testdelete" style="background: red;">전체 삭제! </a>
         </c:if>
@@ -167,7 +164,6 @@
         	<c:when test="${not empty boardList }">
 
 		        <c:forEach var="list" items="${boardList}" varStatus="status" >
-			          <tbody>
 			          <tr>
 
 			            <td>${list.writeNum }</td>
@@ -189,7 +185,6 @@
 			            </c:choose>
 					
 			          </tr>
-			          </tbody>
 
 		  		</c:forEach>
 		  		
@@ -199,7 +194,6 @@
 	        </c:otherwise>
   		</c:choose>
 
-        </tbody>
       </table>
       <!-- 게시판 끝 -->
       <br>
@@ -237,9 +231,12 @@
     <form id="moveForm" method="get">
             <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
    			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+   			
    			<c:if test="${pageMaker.cri.category ne null}">
    				<input type="hidden" name="category" value="${pageMaker.cri.category }">	
+   			
    			</c:if>
+   			
    			<c:if test="${pageMaker.cri.chooseSearch ne null}">
    				<input type="hidden" name="chooseSearch" value="${pageMaker.cri.chooseSearch }">	
    				<input type="hidden" name="search" value="${pageMaker.cri.search }">	

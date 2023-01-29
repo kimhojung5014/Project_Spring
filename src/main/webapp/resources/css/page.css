@@ -30,14 +30,23 @@
  
  /* 검색버튼 */
 .searchbutton {
- text-align : center;
- display:inline-block;
+
+  display:inline-block;
   font-size: 1rem;
-  width: 100px;
+  width: 70px;
   line-height: 30px;
-  border-radius: 20px;
+  border-radius: 10px;
   color: white;
   background-color:rgb(76, 111, 219);
   border: none;
   font-weight: bold;
+}
+.searchbutton:hover{
+ background:silver;
+}
+#search {
+ width:200px;
+ line-height:25px;
+ border-radius: 5px;
+ border:solid 1px gray;
 }

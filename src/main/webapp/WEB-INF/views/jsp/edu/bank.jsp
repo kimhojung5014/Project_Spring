@@ -7,8 +7,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/header_footer.css">
-  <link rel="stylesheet" href="css/bank.css"> 
+  <link rel="stylesheet" href="resources/css/header_footer.css">
+  <link rel="stylesheet" href="resources/css/bank.css"> 
   <title>학점은행제 소개 페이지</title>
 </head>
 <body>

@@ -21,8 +21,6 @@ function replyInsert() {
 	if(replyContent.length > 1000){
 		alert("댓글은 1000자 안으로 입력해주세요")
 	
-	}else if (replyContent.length == 0) {
-		alert("댓글 내용을 입력해주세요")
 	}
 	else {
 		document.getElementById('replyForm').submit();
@@ -36,9 +34,6 @@ function rereplyInsert(i) {
 			alert("댓글은 1000자 안으로 입력해주세요")
 			return
 		
-		}else if (recontent[i].value.length == 0) {
-			alert("댓글은 내용을 입력해주세요")
-			return
 		}else  {
 			replyform[i].submit();
 			
@@ -113,9 +108,15 @@ function chooseDelete(commentNum,wirteNum) {
 	}
 }
 
-
-function show() {
-	const reply = document.getElementById("#click_reply2")
-	reply.readOnly = false;
-	
-}
+//function adjustHeight() {
+//	  var textEle = $('textarea');
+//	  textEle[0].style.height = 'auto';
+//	  var textEleHeight = textEle.prop('scrollHeight');
+//	  textEle.css('height', textEleHeight);
+//	};
+//
+//	adjustHeight(); // 함수를 실행하면 자동으로 textarea의 높이 조절
+//var textEle = $('textarea');
+//textEle.on('keyup', function() {
+//  adjustHeight();
+//});

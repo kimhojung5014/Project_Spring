@@ -42,6 +42,8 @@ public class BoardController {
 		return "redirect:/list";
 	}
 	
+	
+	
 	//페이지에 맞는 글만 가져오는 메소드
 	@Autowired
 	BoardPageListService boardPageListService;
@@ -64,6 +66,8 @@ public class BoardController {
 		return "board/board";
 	}
 	
+	
+	
 	//게시판 내부 들어가기
 	@Autowired
 	GetBoardService getBoardService;  // 게시글 정보 불러오는 서비스
@@ -78,7 +82,7 @@ public class BoardController {
 	public String inToBoard(int writeNum,Criteria cri, Model model) {
 		
 		//댓글 총 개수 불러오기
-		int total = replyTotalService.replyTotal();
+		int total = replyTotalService.replyTotal(writeNum);
 		PageMakerVo pageMake = new PageMakerVo(cri, total);
 		
 		//게시글 내용, 조회 수 업 
@@ -107,27 +111,6 @@ public class BoardController {
 		return "redirect:/list";
 	}
 	
-	
-	//카테고리, 검색 리스트랑 합쳐서 따로 필요 없음
-	
-	//카테고리
-//	@Autowired
-//	BoardCategoryService boardCategoryService;
-//	
-//	@GetMapping(value = "category")
-//	public String category(String category,Model model) {
-//		model.addAttribute("boardList", boardCategoryService.category(category));
-//		return "board/board";
-//	}
-//	//검색
-//	@Autowired
-//	BoardSearchService boardSearchService;
-//	
-//	@PostMapping(value = "boardSearch")
-//	public String boardSearch(String chooseSearch, String search, Model model) {
-//		model.addAttribute("boardList", boardSearchService.searchList(chooseSearch, search));
-//		return "board/board";
-//	}
 	
 	//게시글 삭제
 	@Autowired

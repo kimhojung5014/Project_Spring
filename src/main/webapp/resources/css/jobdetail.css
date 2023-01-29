@@ -102,3 +102,8 @@ font-xl: 1.25rem  20px
   list-style-type: "- ";
   padding-left: 20px;
 }
+
+.link:hover{
+  color:purple;
+   text-decoration:underline;
+}

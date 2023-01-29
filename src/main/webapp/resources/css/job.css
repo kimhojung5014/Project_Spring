@@ -113,6 +113,12 @@ font-xl: 1.25rem  20px
   border: none;
   font-weight: bold;
 }
+
+.submitbutton:hober {
+ 
+  background-color: silver;
+
+}
 /* 직업 추천 css끝 */
 
 /* 여기서부턴 아래 쪽 직업 정보 출력 css */
@@ -131,6 +137,10 @@ font-xl: 1.25rem  20px
   display: inline-block;
   width:500px;
 }
+.listJobName a:hover {
+  color:purple;
+   text-decoration:underline;
+}
 /* 직업 칸에서  연봉, 발전 가능성 , 고용평등*/
 .listJobEtc {
   display: inline-block;
@@ -142,6 +152,7 @@ font-xl: 1.25rem  20px
 }
 .listJobEtcColor {
   color: rgb(76, 111, 219);
+  font-weight:bold;
 }
 
 /* 직업에서 아래칸 설명 부분 */
