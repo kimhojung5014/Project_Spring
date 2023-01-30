@@ -2,7 +2,6 @@ package com.project.myapp.member.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +25,7 @@ public class JoinRepository implements IJoinRepository{
 			joinVo.setUserId(rs.getString("userId"));
 			joinVo.setPw(rs.getString("pw"));
 			joinVo.setNickName(rs.getString("nickName"));
-			joinVo.setEMail(rs.getString("eMail"));
+			joinVo.seteMail(rs.getString("eMail"));
 			joinVo.setUserName(rs.getString("userName"));
 			joinVo.setTelNumber(rs.getString("telNumber"));
 			return joinVo;
@@ -41,7 +40,7 @@ public class JoinRepository implements IJoinRepository{
 						 joinVo.getPw(),
 						 joinVo.getNickName(),
 						 joinVo.getUserName(),
-						 joinVo.getEMail(),
+						 joinVo.geteMail(),
 						 joinVo.getTelNumber());
 	}
 	
@@ -91,7 +90,7 @@ public class JoinRepository implements IJoinRepository{
 				joinVo.getPw(),
 				joinVo.getNickName(),
 				joinVo.getUserName(),
-				joinVo.getEMail(),
+				joinVo.geteMail(),
 				joinVo.getTelNumber(),
 				joinVo.getNumId());
 	}

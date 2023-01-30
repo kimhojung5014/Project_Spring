@@ -226,9 +226,9 @@
 	            <option value="농생명산업 관련직">농생명산업 관련직</option>
 	          </select>
               <br><br>
-          	  <p class="subsubtitle">2.본인이 자신있는 장점을 1개 선택해주세요.</p>
+          	  <p class="subsubtitle">2.본인이 자신 있는 장점을 1개 선택해주세요.</p>
           	  <br>
-          	  	<label><input name="ability" type="radio" value="All">전체</label>
+          	  	<label><input name="ability" type="radio" value="All" checked="checked">전체</label>
           		<label><input name="ability" type="radio" value="신체운동">신체운동</label>
           		<label><input name="ability" type="radio" value="손재능">손재능</label>
           		<label><input name="ability" type="radio" value="공간시각">공간시각</label>
@@ -242,13 +242,12 @@
           		<label><input name="ability" type="radio" value="예술시각">예술시각</label>
           	  <br><br>
 	          <p class="subsubtitle">3.직업 선택 시 우선시 하는 조건 1개를 선택해주세요.</p>
-	          <br>
 	          <ul class="jobAptitude">
 	            <li>
-	              <input type="radio" name="priority" value="REWARDVALUE"> 보상
+	              <input type="radio" name="priority" value="REWARDVALUE" checked="checked"> 보상
 	            </li>
 	            <li>
-	              <input type="radio" name="priority" value="EMPLOYMENTSECURITYVALUE"> 고용안정률
+	              <input type="radio" name="priority" value="EMPLOYMENTSECURITYVALUE"> 고용 안정률
 	            </li>
 	            <li>
 	              <input type="radio"name="priority" value="DEVELOPMENTPOSSIBILITYVALUE"> 발전가능성

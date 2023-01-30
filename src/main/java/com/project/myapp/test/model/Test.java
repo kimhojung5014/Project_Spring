@@ -1,6 +1,5 @@
 package com.project.myapp.test.model;
 
-import java.util.ArrayList;
 
 public class Test {
 	
@@ -46,19 +45,6 @@ public class Test {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	ArrayList<String> answer;
-	public Test() {
-		
-	}
-	public ArrayList<String> getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(ArrayList<String> answer) {
-		this.answer = answer;
-	}
-
 	
 
 	public String getAnswer1() {

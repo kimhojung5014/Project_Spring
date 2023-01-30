@@ -1,6 +1,5 @@
 package com.project.myapp.member.service;
 
-import java.util.Map;
 
 public interface SearchPwService {
 

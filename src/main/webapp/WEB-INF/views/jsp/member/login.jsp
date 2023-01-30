@@ -57,9 +57,9 @@
 	            	</td>
 	            </tr>
               <tr>
-                <td><a style="display: block;" class="button" href ="findId">ID 찾기</a></td>
-                <td><a style="display: block;" class="button" href = "findPw">PW 찾기</a></td>
-                <td><a style="display: block;" class="button" href = "join">회원가입</a></td>
+                <td><a style="display: inline-block;" class="button" href ="findId">ID 찾기</a></td>
+                <td><a style="display: inline-block;" class="button" href = "findPw">PW 찾기</a></td>
+                <td><a style="display: inline-block;" class="button" href = "join">회원가입</a></td>
               </tr>
             </table>
           </form>

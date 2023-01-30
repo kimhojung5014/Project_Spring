@@ -147,7 +147,16 @@
             <p class="listHeadLine">
               <span class="listJobName"><b><a href="jobDetail.do?job=${list.job }"> ${list.job }</a></b></span> 
 
-              <span class="listJobEtc2"><span class="listJobEtcColor">핵심 능력: </span><b>${list.ability}</b></span>
+              
+              <c:if test="${!empty list.ability}">
+              <span class="listJobEtc2"><span class="listJobEtcColor">핵심 능력: </span>
+              <b>${list.ability}</b>
+              </span>
+              </c:if>
+              <c:if test="${empty list.ability}">
+              
+           
+              </c:if>
             </p>
             <p class="listJobExplain" >${list.summary}</p>
              <p class="listJobExplain">

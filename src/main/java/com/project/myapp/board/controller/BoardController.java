@@ -14,7 +14,6 @@ import com.project.myapp.board.service.BoardInsertService;
 import com.project.myapp.board.service.BoardPageListService;
 import com.project.myapp.board.service.BoardTotalService;
 import com.project.myapp.board.service.GetBoardService;
-import com.project.myapp.board.service.TestBoard;
 import com.project.myapp.page.model.Criteria;
 import com.project.myapp.page.model.PageMakerVo;
 import com.project.myapp.reply.service.ReplyListService;
@@ -25,23 +24,23 @@ import com.project.myapp.reply.service.ReplyTotalService;
 public class BoardController {
 	
 	//테스트용 글 삽입 삭제
-	@Autowired
-	TestBoard test;
-	
-	@GetMapping(value = "testinsert")
-	public String testInsert() {
-		for (int i = 0; i < 10; i++) {
-			test.insertTest();
-		}
-		
-		return "redirect:/list";
-	}
-	@GetMapping(value = "testdelete")
-	public String testDelete() {
-		test.deleteTest();
-		return "redirect:/list";
-	}
-	
+//	@Autowired
+//	TestBoard test;
+//	
+//	@GetMapping(value = "testinsert")
+//	public String testInsert() {
+//		for (int i = 0; i < 10; i++) {
+//			test.insertTest();
+//		}
+//		
+//		return "redirect:/list";
+//	}
+//	@GetMapping(value = "testdelete")
+//	public String testDelete() {
+//		test.deleteTest();
+//		return "redirect:/list";
+//	}
+//	
 	
 	
 	//페이지에 맞는 글만 가져오는 메소드

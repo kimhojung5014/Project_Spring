@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.project.myapp.job.model.JobDetailVo;
 import com.project.myapp.job.service.JobDetailService;
 import com.project.myapp.job.service.JobListService;
 import com.project.myapp.job.service.JobRecommendService;
