@@ -60,26 +60,26 @@ public class MajorController {
 	@PostMapping(value = "majorRecommend")
 	public String majorRecommend(MajorTest majorTest, Model model, Criteria cri) {
 		
-		int total = majorReTotalServiceImpl.majorReTotal(majorTest, cri);
+//		int total = majorReTotalServiceImpl.majorReTotal(majorTest, cri);
 
-		PageMakerVo pageMake = new PageMakerVo(cri, total);
+//		PageMakerVo pageMake = new PageMakerVo(cri, total);
 
 		model.addAttribute("majorList", majorRecommendServiceImpl.majorRecommend(majorTest, cri));
-		model.addAttribute("pageMaker", pageMake);
+//		model.addAttribute("pageMaker", pageMake);
 		
-//		if (majorTest.getPriority().equals("employmentdata")) {
-//			majorTest.setPriority("취업률");
-//		}else if (majorTest.getPriority().equals("salarydata")) {
-//			majorTest.setPriority("임금");
-//		}else {
-//			majorTest.setPriority("직업 만족도");
-//		}
-//		if (majorTest.getUni().equals("all")) {
-//			majorTest.setUni("대학교(4,2년제 전체)");
-//		}
+		if (majorTest.getPriority().equals("employmentdata")) {
+			majorTest.setPriority("취업률");
+		}else if (majorTest.getPriority().equals("salarydata")) {
+			majorTest.setPriority("임금");
+		}else {
+			majorTest.setPriority("직업 만족도");
+		}
+		if (majorTest.getUni().equals("all")) {
+			majorTest.setUni("대학교(4,2년제 전체)");
+		}
 		
 		model.addAttribute("majorTest", majorTest);
 		
-		return "major/majorresult";
+		return "major/majorresult4";
 	}
 }

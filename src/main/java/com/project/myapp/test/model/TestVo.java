@@ -1,7 +1,7 @@
 package com.project.myapp.test.model;
 
 
-public class Test {
+public class TestVo {
 	
 	String answer1,
 		   answer2,

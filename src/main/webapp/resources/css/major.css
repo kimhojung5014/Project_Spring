@@ -171,15 +171,17 @@ font-xl: 1.25rem  20px
 	 color: rgb(76, 111, 219);
 }
 
-#chartTable {
+.chartTable {
+	
 	width: 100%;
-	border-spacing: 0 20px;
+	border-spacing: 20px;
 }
 
 
-#chartTable td{
+.chartTable td{
 	width: 50%;
 	height: auto;
+	border: solid 1px;
 }
 
 .major:hover{

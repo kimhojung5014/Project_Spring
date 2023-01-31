@@ -8,13 +8,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="resources/css/major.css?oo"> 
+  <link rel="stylesheet" href="resources/css/major.css?112"> 
   <link rel="stylesheet" href="resources/css/header_footer.css">
   <link rel="stylesheet" href="resources/css/page.css">
   <title>학과</title>
 </head>
 <body>
 <script src="resources/js/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
    <!-- 헤더 부분 -->
   <header id="headerstyle">
     <div id="titleHome">
@@ -69,7 +70,7 @@
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-          <li><a href="jobList">직업 추천</a></li>
+          <li><a href="jobmajorList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -108,7 +109,7 @@
     <!-- 4번째 메뉴 끝 -->
     
     <!-- 5번째 메뉴 -->
-            <li><a href="list">커뮤니티</a>
+            <li><a href="majorList">커뮤니티</a>
   
           </li>
         </ul>
@@ -122,16 +123,22 @@
   <!-- 메인 부분 -->
   <div id="mainStyle">
     <div id="mainContent">
-      <p class= title>학과 추천 결과</p>
+      <div class="title">
+      <p >학과 추천 결과</p>
+      </div>
+    <c:forEach var="majorList" items="${majorList}" varStatus="status">
+
       <div class="textarea">
-        <p class="subtitle">나에게 맞는 학과</p>
+        <p class="subtitle">나에게 맞는 학과, 학위 알아보기</p>
         <div class="intextarea" >
-        	
-        	<c:forEach var="majorList" items="${majorList}" >
+        
+    
         
         	<p class="subsubtitle">
+        	
             <c:if test="${majorTest.uni ne '대학교(4,2년제 전체)'}">
             	${majorTest.uni }에서&nbsp;
+            	
             </c:if>
             <c:if test="${majorTest.uni eq '대학교(4,2년제 전체)'}">
             	대학교(4,2년제 전체)&nbsp; 
@@ -142,9 +149,11 @@
             <c:if test="${majorTest.lclass eq 'all'}">
             	 전체 계열 중에서&nbsp; 
             </c:if>
-             ${majorTest.priority}(가)이 제일 높은 곳은 <span style="color: rgb(76, 111, 219)">${majorList.major }</span>입니다.</p>
-
-            <p class="subsubtitle">${majorTest.priority} 평균 <span style="color: rgb(76, 111, 219)">${majorList.priority }%</span>입니다.</p>
+             ${majorTest.priority}&nbsp;  ${status.index + 1 }등은 <span style="color: rgb(76, 111, 219)">${majorList.major }</span>입니다.</p>
+			
+			<c:set var="employment" value="${fn:split(majorList.employment,'@')}"/>
+			
+            <p class="subsubtitle">취업률은 평균 <span style="color: rgb(76, 111, 219)">${employment[0]}</span>입니다.</p>
 
 			<c:set var="salary" value="${fn:split(majorList.salaryData,'@')}"/>
 			
@@ -180,32 +189,33 @@
 	 	<table class="chartTable">
 	 		<tr>
 	 			<td><canvas class="myChart1"></canvas></td>
-<%-- 	 			<td><canvas class="myChart2"></canvas></td> --%>
-<!-- 	 		</tr> -->
-<!-- 	 		<tr> -->
-<%-- 	 			<td><canvas class="myChart3"></canvas></td> --%>
+	 			<td><canvas class="myChart2"></canvas></td>
+	 		</tr>
+	 		<tr>
+	 			<td><canvas class="myChart3"></canvas></td>
 	 		
-<%-- 	 			<td><canvas class="myChart4"></canvas></td> --%>
-<!-- 	 		</tr> -->
-<!-- 	 		<tr> -->
-<!-- 	 			<td> -->
-<%-- 	 				<canvas class="myChart5"></canvas> --%>
-<!-- 	 			</td> -->
-<%-- 	 			<td><canvas class="myChart6"></canvas></td> --%>
-<!-- 	 		</tr> -->
-	 	</table>
-	 	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	 			<td><canvas class="myChart4"></canvas></td>
+	 		</tr>
+	 		<tr>
+	 			<td>
+	 				<canvas class="myChart5"></canvas>
+	 				
+
+	 			</td>
+	 			<td><canvas class="myChart6"></canvas></td>
+	 		</tr>
+	 	</table>	
+        </div>
+      </div>
 <!--입학 상황-->
 <script type="text/javascript">
-var applicantData = "<c:out value='${majorList.applicantData}'/>";
+			var applicantData = "<c:out value='${majorList.applicantData}'/>";
 			
-var appli = applicantData.split("@");
+			var appli = applicantData.split("@");
 			
-            var context = document
-                .getElementsByClassName('myChart1')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart1');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'bar', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['지원자','입학자'],
@@ -264,7 +274,7 @@ var appli = applicantData.split("@");
         			,
         			animation: {
         				duration: 1,
-        				onComplete: function () {
+        				onCompvare: function () {
         					var chartInstance = this.chart,
         						ctx = chartInstance.ctx;
         					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
@@ -286,18 +296,15 @@ var appli = applicantData.split("@");
 
                 	            });
             //입학 상황 차트 끝
-  </script>
-  
-<script type="text/javascript">         
+    
             //취업률
 			var employmentData = "<c:out value='${majorList.employmentData}'/>";
 			
 			var employment = employmentData.split("@");
 			
-            var context = document
-                .getElementsByClassName('myChart2')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart2');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'bar', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['전체','남자','여자'],
@@ -360,7 +367,7 @@ var appli = applicantData.split("@");
         			,
         			animation: {
         				duration: 1,
-        				onComplete: function () {
+        				onCompvare: function () {
         					var chartInstance = this.chart,
         						ctx = chartInstance.ctx;
         					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
@@ -378,22 +385,19 @@ var appli = applicantData.split("@");
         				}
         			}
 
-//                 	                }
+                	                }
 
-//                });
-//             //취업률 끝
- </script> 
+               });
+            //취업률 끝
 
-	<script type="text/javascript">
            //졸업 후 상황
 			var afterData = "<c:out value='${majorList.afterData}'/>";
 			
 			var after = afterData.split("@");
 			
-            var context = document
-                .getElementsByClassName('myChart3')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart3');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['진학자: '+after[0],'취업자: '+after[1],'기타: '+after[2]],
@@ -450,20 +454,17 @@ var appli = applicantData.split("@");
                 	                }
 
                });
-</script> 
 
-<script type="text/javascript">
 
-// var fieldItem = "<c:out value='${majorList.fieldItem}'/>";
-// var fieldData = "<c:out value='${majorList.fieldData}'/>";
+			var fieldItem = "<c:out value='${majorList.fieldItem}'/>";
+			var fieldData = "<c:out value='${majorList.fieldData}'/>";
 			
-// var Item = fieldItem.split("@");
-// var Data = fieldData.split("@");
+			var Item = fieldItem.split("@");
+			var Data = fieldData.split("@");
 
-            var context = document
-                .getElementById('myChart4')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart4');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -529,20 +530,17 @@ var appli = applicantData.split("@");
                 	                }
 
                });
-</script> 
 
-<script type="text/javascript">
 
-var salaryItemList = "<c:out value='${majorList.salaryItem}'/>";
-var salaryDataList = "<c:out value='${majorList.salaryData}'/>";
+			var salaryItemmajorList = "<c:out value='${majorList.salaryItem}'/>";
+			var salaryDatamajorList = "<c:out value='${majorList.salaryData}'/>";
 			
-var salaryItem = salaryItemList.split("@");
-var salaryData = salaryDataList.split("@");
+			var salaryItem = salaryItemmajorList.split("@");
+			var salaryData = salaryDatamajorList.split("@");
 
-            var context = document
-                .getElementById('myChart5')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart5');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -604,19 +602,17 @@ var salaryData = salaryDataList.split("@");
                 	                }
 
                });
- </script>
-<script type="text/javascript">
 
-var satisfactionItemList = "<c:out value='${majorList.satisfactionItem}'/>";
-var satisfactionDataList = "<c:out value='${majorList.satisfactionData}'/>";
+
+			var satisfactionItemmajorList = "<c:out value='${majorList.satisfactionItem}'/>";
+			var satisfactionDatamajorList = "<c:out value='${majorList.satisfactionData}'/>";
 			
-var satisfactionItem = satisfactionItemList.split("@");
-var satisfactionData = satisfactionDataList.split("@");
+			var satisfactionItem = satisfactionItemmajorList.split("@");
+			var satisfactionData = satisfactionDatamajorList.split("@");
 
-            var context = document
-                .getElementsByClassName('myChart6')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart6');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -678,12 +674,11 @@ var satisfactionData = satisfactionDataList.split("@");
                 	                }
 
                });
-</script>	
-	 	</c:forEach>
-        </div>
-      </div>
-      <!-- 추천 끝 -->
-      
+</script>
+
+     </c:forEach>
+
+
       <!-- 대학정보끝 -->
     </div>
   </div>
@@ -699,7 +694,7 @@ var satisfactionData = satisfactionDataList.split("@");
       <li><a href="">사이트맵</a></li>
     </ul>
 
-    <p>서울특별시 마포구 신촌로 176 4층 401호 제작자 번호 010-5375-4131</p>
+    <p>서울특별시 마포구 신촌로 176 4층 402호 제작자 번호 010-5375-4131</p>
     
 </footer>
 
