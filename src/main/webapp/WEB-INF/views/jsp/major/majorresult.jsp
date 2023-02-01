@@ -8,13 +8,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="resources/css/major.css?oo"> 
+  <link rel="stylesheet" href="resources/css/major.css?112"> 
   <link rel="stylesheet" href="resources/css/header_footer.css">
   <link rel="stylesheet" href="resources/css/page.css">
   <title>학과</title>
 </head>
 <body>
 <script src="resources/js/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
    <!-- 헤더 부분 -->
   <header id="headerstyle">
     <div id="titleHome">
@@ -69,7 +70,7 @@
     <!-- 2번째 메뉴 끝 -->
     
     <!-- 3번째 메뉴 시작 -->
-          <li><a href="jobList">직업 추천</a></li>
+          <li><a href="jobmajorList">직업 추천</a></li>
     <!--3번째 메뉴 끝  -->
 
     <!-- 4번째 메뉴 시작 -->
@@ -108,7 +109,7 @@
     <!-- 4번째 메뉴 끝 -->
     
     <!-- 5번째 메뉴 -->
-            <li><a href="list">커뮤니티</a>
+            <li><a href="majorList">커뮤니티</a>
   
           </li>
         </ul>
@@ -125,9 +126,14 @@
       <div class="title">
       <p >학과 추천 결과</p>
       </div>
+    <c:forEach var="majorList" items="${majorList}" varStatus="status">
+
       <div class="textarea">
         <p class="subtitle">나에게 맞는 학과, 학위 알아보기</p>
         <div class="intextarea" >
+        
+    
+        
         	<p class="subsubtitle">
         	
             <c:if test="${majorTest.uni ne '대학교(4,2년제 전체)'}">
@@ -143,17 +149,19 @@
             <c:if test="${majorTest.lclass eq 'all'}">
             	 전체 계열 중에서&nbsp; 
             </c:if>
-             ${majorTest.priority}(가)이 제일 높은 곳은 <span style="color: rgb(76, 111, 219)">${majorList[0].major }</span>입니다.</p>
+             ${majorTest.priority}&nbsp;  ${status.index + 1 }등은 <span style="color: rgb(76, 111, 219)">${majorList.major }</span>입니다.</p>
+			
+			<c:set var="employment" value="${fn:split(majorList.employment,'@')}"/>
+			
+            <p class="subsubtitle">취업률은 평균 <span style="color: rgb(76, 111, 219)">${employment[0]}</span>입니다.</p>
 
-            <p class="subsubtitle">${majorTest.priority} 평균 <span style="color: rgb(76, 111, 219)">${majorList[0].priority }%</span>입니다.</p>
-
-			<c:set var="salary" value="${fn:split(majorList[0].salaryData,'@')}"/>
+			<c:set var="salary" value="${fn:split(majorList.salaryData,'@')}"/>
 			
             <p class="subsubtitle">첫 직장 월평균 임금은 <span style="color: rgb(76, 111, 219)">${salary[0]}만원</span> 입니다.</p>
 
             <p class="subsubtitle">첫 직장 만족도는 
-            <c:set var="satisfactionItem" value="${fn:split(majorList[0].satisfactionItem,'@')}"></c:set>
-            <c:set var="satisfactionData" value="${fn:split(majorList[0].satisfactionData,'@')}"></c:set>
+            <c:set var="satisfactionItem" value="${fn:split(majorList.satisfactionItem,'@')}"></c:set>
+            <c:set var="satisfactionData" value="${fn:split(majorList.satisfactionData,'@')}"></c:set>
             <c:forEach var="loof" begin="0" end="${fn:length(satisfactionItem)-1 }" varStatus="i">
            		 ${satisfactionItem[i.index] }<span style="color: rgb(76, 111, 219)"> ${satisfactionData[i.index]}%&nbsp; </span>
             </c:forEach>
@@ -163,10 +171,10 @@
             
             <p class="subsubtitle">
             <c:if test="${majorTest.money eq '경제적으로 힘든 상황'}">
-            	<span style="color: rgb(76, 111, 219)">온라인(방송통신,사이버) 대학교&nbsp; </span><a class="major" href="majorDetail?major=${majorList[0].major }">${majorList[0].major }</a>를 추천해드립니다.
+            	<span style="color: rgb(76, 111, 219)">온라인(방송통신,사이버) 대학교&nbsp; </span><a class="major" href="majorDetail?major=${majorList.major }">${majorList.major }</a>를 추천해드립니다.
             </c:if>
             <c:if test="${majorTest.money ne '경제적으로 힘든 상황'}">
-            	<span style="color: rgb(76, 111, 219)">${majorTest.uni} &nbsp; </span><a class="major" href="majorDetail?major=${majorList[0].major }">${majorList[0].major }</a>를 추천해드립니다.
+            	<span style="color: rgb(76, 111, 219)">${majorTest.uni} &nbsp; </span><a class="major" href="majorDetail?major=${majorList.major }">${majorList.major }</a>를 추천해드립니다.
             </c:if>
            </p>
            </c:if>
@@ -178,177 +186,36 @@
            		</p>
            </c:if>
             		
-	 	<table id="chartTable">
+	 	<table class="chartTable">
 	 		<tr>
-	 			<td><canvas id="myChart1"></canvas></td>
-	 			<td><canvas id="myChart2"></canvas></td>
+	 			<td><canvas class="myChart1"></canvas></td>
+	 			<td><canvas class="myChart2"></canvas></td>
 	 		</tr>
 	 		<tr>
-	 			<td><canvas id="myChart3"></canvas></td>
+	 			<td><canvas class="myChart3"></canvas></td>
 	 		
-	 			<td><canvas id="myChart4"></canvas></td>
+	 			<td><canvas class="myChart4"></canvas></td>
 	 		</tr>
 	 		<tr>
 	 			<td>
-	 				<canvas id="myChart5"></canvas>
-	 				<c:set var="salaryItem" value="${fn:split(majorDto.salaryItem,'@')}"/>
-	 				<c:set var="salaryData" value="${fn:split(majorDto.salaryData,'@')}"/>
+	 				<canvas class="myChart5"></canvas>
+	 				
 
 	 			</td>
-	 			<td><canvas id="myChart6"></canvas></td>
+	 			<td><canvas class="myChart6"></canvas></td>
 	 		</tr>
 	 	</table>	
         </div>
       </div>
-      <!-- 추천 끝 -->
-      <!-- 대학정보 시작 -->
-      <div class="title">
-        <p>학과 정보 총 ${pageMaker.total }건</p>
-      </div>
-      <br>
-      <!-- 데이터 끌어와서 리스트로 보여주는 화면 나중에 JSP로 직접 입력 말고 데이터 끌고오자 -->
-      <ul>
-        <!-- 직업 1줄 시작-->
-        <c:forEach var="list" items="${majorList}">
-        <li class="rowLine">
-          <p class="listHeadLine">
-            <span class="listJobName"><b><a href="majorDetail?major=${list.major }">${list.major }</a>&nbsp;<span id="uni">[${list.lClass } ${list.uni}]</span></b></span> 
-            <span class="listJobEtc"><span class="listJobEtcColor">취업률: </span>${list.employment}</span>
-            <span class="listJobEtc"><span class="listJobEtcColor">첫 직장 임금: </span>${list.salary}</span>
-          </p>
-          <p class="listJobExplain">-${list.summary}</p>
-          <p class="listJobExplain">
-          <c:if test="${not empty list.department}">
-          <span class="listJobEtcColor"><b>관련학과 :</b></span>
-          <c:forEach var="department" items="${fn:split(list.department,',') }" varStatus="i">
-          		<c:if test="${i.index <= 15 }">
-          		${department},&nbsp;
-          		</c:if>
-          		<c:if test="${i.last }"> ...</c:if>
-          </c:forEach>
-             
-          </c:if>
-          </p>
-        </li>
-		</c:forEach>
-		  <c:if test="${pageMaker.total eq 0}">
-		  	<br>
-		  		<li style="text-align: center;"><h2> 일치하는 학과가 없습니다.</h2></li>
-		  	<br>
-		  </c:if>
-      </ul>
-        <!-- 아래 페이지 넘버 부분 -->
-        <div class="pageInfo_area">
- 			<table id="pageInfo" class="pageInfo oncenter">
- 				<!-- 이전페이지 버튼 -->
- 				<tr>
- 					<c:if test="${pageMaker.total ne 0}">
-                		<td class="pageInfo_btn"><a style="display: inline-block;" href="${1}">처음</a></td>
-                	</c:if>
-                	
-               		 <c:if test="${pageMaker.prev}">
-                    <td class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">&larr;</a></td>
-               		 </c:if>
-
-                <!-- 각 번호 페이지 버튼 -->
-                <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                   <c:if test="${num ne 0}">
-                    <td class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></td>
-                    </c:if>
-                </c:forEach>
-
-                <!-- 다음페이지 버튼 -->
-                <c:if test="${pageMaker.next}">
-                    <td class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">&rarr;</a></td>
-                </c:if> 
-                <c:if test="${pageMaker.total ne 0}">
-                <td class="pageInfo_btn"><a style="display: inline-block;" href="${pageMaker.realEnd}">&nbsp;끝</a></td>
-                </c:if>
-                <tr>
- 			</table>
-        </div>
-    <form id="moveForm" method="post">
-            	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-   				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-			    <input type="hidden" name="uni" value="${majorTest.uni}">
-				<input type="hidden" name="money" value="${majorTest.money}">
-				<input type="hidden" name="time" value="${majorTest.time}">
-				<input type="hidden" name="lclass" value="${majorTest.lclass }">
-				<input type="hidden" name="priority" value="${majorTest.priority }	">
-   			<c:if test="${pageMaker.cri.search ne null}">
-   				<input type="hidden" name="search" value="${pageMaker.cri.search }">
-   			</c:if>
-  	</form>
-        <!-- 페이지 넘버부분 끝 -->
-        <!-- 검색창 -->
-        <table style="margin: auto;" >
-          <tr>
-            <td>
-              <form action="majorRecommend" id="major" method="post">
-				  <input type="search" id="search" name="search" >&nbsp;
-                  <button type="button" class="searchbutton" onclick="searchCheck()">검색</button>
-              </form>
-            </td>
-
-          </tr>
-        </table>
-        <br>
-	<script type="text/javascript">
-	$(".pageInfo a").on("click", function(e){
-		let moveForm = $("#moveForm");
-	    e.preventDefault();
-	    moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	    moveForm.attr("action", "majorRecommend");
-	    moveForm.submit();
-	    
-	});
-
-	function searchCheck(){
-		  const search = document.getElementById("search").value;
-		  
-		  if(search.length == 0){
-		    alert("검색어를 입력해주세요");
-		  }
-		  else if(search.length > 100){
-		    alert("검색어는 100자까지 가능합니다.");
-		  }
-		  else{
-		    document.getElementById("majorRecommend").submit();   
-		  }
-
-		}
-	</script>
-      
-      <!-- 대학정보끝 -->
-    </div>
-  </div>
-<!-- 메인  끝-->
-
-  <!-- 푸터 -->
-  <footer id = "footer" > 
-    
-    <ul  id="bottomenu">
-      <li><a href="">사이트제작자</a></li>
-      <li><a href="">개인정보처리방침</a></li>
-      <li><a href="">API 정보</a></li>
-      <li><a href="">사이트맵</a></li>
-    </ul>
-
-    <p>서울특별시 마포구 신촌로 176 4층 402호 제작자 번호 010-5375-4131</p>
-    
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!--입학 상황-->
 <script type="text/javascript">
-			const applicantData = "<c:out value='${majorList[0].applicantData}'/>";
+			var applicantData = "<c:out value='${majorList.applicantData}'/>";
 			
-			const appli = applicantData.split("@");
+			var appli = applicantData.split("@");
 			
-            var context = document
-                .getElementById('myChart1')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart1');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'bar', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['지원자','입학자'],
@@ -407,7 +274,7 @@
         			,
         			animation: {
         				duration: 1,
-        				onComplete: function () {
+        				onCompvare: function () {
         					var chartInstance = this.chart,
         						ctx = chartInstance.ctx;
         					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
@@ -429,18 +296,15 @@
 
                 	            });
             //입학 상황 차트 끝
-  </script>
-  
-<script type="text/javascript">         
+    
             //취업률
-			const employmentData = "<c:out value='${majorList[0].employmentData}'/>";
+			var employmentData = "<c:out value='${majorList.employmentData}'/>";
 			
-			const employment = employmentData.split("@");
+			var employment = employmentData.split("@");
 			
-            var context = document
-                .getElementById('myChart2')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart2');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'bar', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['전체','남자','여자'],
@@ -503,7 +367,7 @@
         			,
         			animation: {
         				duration: 1,
-        				onComplete: function () {
+        				onCompvare: function () {
         					var chartInstance = this.chart,
         						ctx = chartInstance.ctx;
         					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
@@ -525,18 +389,15 @@
 
                });
             //취업률 끝
-</script>
 
-	<script type="text/javascript">
            //졸업 후 상황
-			const afterData = "<c:out value='${majorList[0].afterData}'/>";
+			var afterData = "<c:out value='${majorList.afterData}'/>";
 			
-			const after = afterData.split("@");
+			var after = afterData.split("@");
 			
-            var context = document
-                .getElementById('myChart3')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart3');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: ['진학자: '+after[0],'취업자: '+after[1],'기타: '+after[2]],
@@ -593,20 +454,17 @@
                 	                }
 
                });
-</script>
 
-<script type="text/javascript">
 
-			const fieldItem = "<c:out value='${majorList[0].fieldItem}'/>";
-			const fieldData = "<c:out value='${majorList[0].fieldData}'/>";
+			var fieldItem = "<c:out value='${majorList.fieldItem}'/>";
+			var fieldData = "<c:out value='${majorList.fieldData}'/>";
 			
-			const Item = fieldItem.split("@");
-			const Data = fieldData.split("@");
+			var Item = fieldItem.split("@");
+			var Data = fieldData.split("@");
 
-            var context = document
-                .getElementById('myChart4')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart4');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -672,20 +530,17 @@
                 	                }
 
                });
-</script>
 
-<script type="text/javascript">
 
-			const salaryItemList = "<c:out value='${majorList[0].salaryItem}'/>";
-			const salaryDataList = "<c:out value='${majorList[0].salaryData}'/>";
+			var salaryItemmajorList = "<c:out value='${majorList.salaryItem}'/>";
+			var salaryDatamajorList = "<c:out value='${majorList.salaryData}'/>";
 			
-			const salaryItem = salaryItemList.split("@");
-			const salaryData = salaryDataList.split("@");
+			var salaryItem = salaryItemmajorList.split("@");
+			var salaryData = salaryDatamajorList.split("@");
 
-            var context = document
-                .getElementById('myChart5')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart5');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -747,19 +602,17 @@
                 	                }
 
                });
-</script>
-<script type="text/javascript">
 
-			const satisfactionItemList = "<c:out value='${majorList[0].satisfactionItem}'/>";
-			const satisfactionDataList = "<c:out value='${majorList[0].satisfactionData}'/>";
+
+			var satisfactionItemmajorList = "<c:out value='${majorList.satisfactionItem}'/>";
+			var satisfactionDatamajorList = "<c:out value='${majorList.satisfactionData}'/>";
 			
-			const satisfactionItem = satisfactionItemList.split("@");
-			const satisfactionData = satisfactionDataList.split("@");
+			var satisfactionItem = satisfactionItemmajorList.split("@");
+			var satisfactionData = satisfactionDatamajorList.split("@");
 
-            var context = document
-                .getElementById('myChart6')
-                .getContext('2d');
-            var myChart = new Chart(context, {
+            var context = document.getElementsByClassName('myChart6');
+            context[${status.index}].getContext('2d');
+            var myChart = new Chart(context[${status.index}], {
                 type: 'pie', // 차트의 형태
                 data: { // 차트에 들어갈 데이터
                     labels: [
@@ -822,5 +675,28 @@
 
                });
 </script>
+
+     </c:forEach>
+
+
+      <!-- 대학정보끝 -->
+    </div>
+  </div>
+<!-- 메인  끝-->
+
+  <!-- 푸터 -->
+  <footer id = "footer" > 
+    
+    <ul  id="bottomenu">
+      <li><a href="">사이트제작자</a></li>
+      <li><a href="">개인정보처리방침</a></li>
+      <li><a href="">API 정보</a></li>
+      <li><a href="">사이트맵</a></li>
+    </ul>
+
+    <p>서울특별시 마포구 신촌로 176 4층 402호 제작자 번호 010-5375-4131</p>
+    
+</footer>
+
 </body>
 </html>

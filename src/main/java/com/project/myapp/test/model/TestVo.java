@@ -32,7 +32,44 @@ public class TestVo {
 		   answer27,
 		   answer28,
 		   name,
-		   gender;
+		   gender,
+		   ansAll;
+	
+	
+	public String getAnsAll() {
+		return ansAll;
+	}
+	public void setAnsAll() {
+		ansAll =  "B1="+answer1+
+				 " B2="+answer2+
+				 " B3="+answer3+
+					   " B4="+answer4+
+					   " B5="+answer5+
+					   " B6="+answer6+
+					   " B7="+answer7+
+					   " B8="+answer8+
+					   " B9="+answer9+
+					   " B10="+answer10+
+					   " B11="+answer11+
+					   " B12="+answer12+
+					   " B13="+answer13+
+					   " B14="+answer14+
+					   " B15="+answer15+
+					   " B16="+answer16+
+					   " B17="+answer17+
+					   " B18="+answer18+
+					   " B19="+answer19+
+					   " B20="+answer20+
+					   " B21="+answer21+
+					   " B22="+answer22+
+					   " B23="+answer23+
+					   " B24="+answer24+
+					   " B25="+answer25+
+					   " B26="+answer26+
+					   " B27="+answer27+
+					   " B28="+answer28;
+		
+	}
 	public String getName() {
 		return name;
 	}

@@ -17,5 +17,5 @@ public interface IMajorRepository {
 	
 	public int majorReTotal(MajorTest majorTest, Criteria cri);
 	
-	public List<MajorVo> majorRecommend(MajorTest majorTest, Criteria cri);
+	public List<MajorVo> majorRecommend(MajorTest majorTest);
 }

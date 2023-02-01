@@ -24,6 +24,8 @@ public class JobValuesTestController {
 	@PostMapping(value = "test")
 	public String testVo(TestVo testVo, Model model) {
 	    
+		testVo.setAnsAll();
+		
 		model.addAttribute("value", postJsonServiceImpl.postJson(testVo));
 		
 		return "test/testvalue";

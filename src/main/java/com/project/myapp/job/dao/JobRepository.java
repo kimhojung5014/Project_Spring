@@ -142,7 +142,7 @@ public class JobRepository implements IJobRepository{
 		System.out.println(sql.toString());
 		
 		return jdbc.query(sql.toString(), new JobDetailMapper(),
-				((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 (1-1) * 10 = 0이고 + 1 하면 1 항상 1,11,21같이 시작해야 해서 +1
+				((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 
 				 cri.getPageNum() * cri.getAmount() //페이지 * 10 해주면 된다.
 				);
 	}

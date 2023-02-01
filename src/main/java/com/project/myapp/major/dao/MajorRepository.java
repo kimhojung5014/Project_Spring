@@ -127,20 +127,20 @@ public class MajorRepository implements IMajorRepository{
 	}
 	
 	@Override
-	public List<MajorVo> majorRecommend(MajorTest majorTest, Criteria cri) {
-		
-
+	public List<MajorVo> majorRecommend(MajorTest majorTest) {
 	
 		StringBuilder sql = new StringBuilder();
 		
 		if (majorTest.getPriority().equals("SATISFACTIONDATA")) {
 			sql.append("select * "+
-					   "from(select ROW_NUMBER() OVER (ORDER BY REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 5) desc,REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 4) desc)as rn,REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 5)priority , m.* "+
+					   "from(select ROW_NUMBER() OVER (ORDER BY REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 5) desc," +
+					   	    "REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 4) desc)as rn,REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 5)priority , m.* "+
 						    "from majordetail m ");
 		}
 		else {
 			sql.append("select * "+
-					   "from(select ROW_NUMBER() OVER (ORDER BY REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 1) desc)as rn,REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 1)priority ,m.* "+
+					   "from(select ROW_NUMBER() OVER (ORDER BY REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 1) desc)as rn," +
+					   		"REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 1)priority ,m.* "+
 						    "from majordetail m ");
 		}
 		//전공계열이 전체가 아니라면
@@ -160,56 +160,54 @@ public class MajorRepository implements IMajorRepository{
 		}
 		sql.append(") ");
 		sql.append("where rn BETWEEN 1 and 10");
-		return jdbc.query(sql.toString(),  
-			new	RowMapper<MajorVo>(){
-			@Override
-			public MajorVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-				MajorVo majorVo = new MajorVo(rs.getString("lClass"),
-											 rs.getString("majorSeq"),
-											 rs.getString("uni"),
-											 rs.getString("major"),
-											 rs.getString("salary"),
-											 rs.getString("employment"),
-											 rs.getString("department"),
-											 rs.getString("summary"),
-											 rs.getString("subject_description"),
-											 rs.getString("subject_name"),
-											 rs.getString("act_name"),
-											 rs.getString("act_description"),
-											 rs.getString("job"),
-											 rs.getString("qualifications"),
-											 rs.getString("interest"),
-											 rs.getString("property"),
-											 rs.getString("gradeuate"),
-											 rs.getString("description"),
-											 rs.getString("SBJECT_NM"),
-											 rs.getString("SBJECT_SUMRY"),
-											 rs.getString("area"),
-											 rs.getString("schoolURL"),
-											 rs.getString("campus_nm"),
-											 rs.getString("majorName"),
-											 rs.getString("schoolName"),
-											 rs.getString("fieldItem"),
-											 rs.getString("fieldData"),
-											 rs.getString("afterItem"),
-											 rs.getString("afterData"),
-											 rs.getString("salaryItem"),
-											 rs.getString("salaryData"),
-											 rs.getString("satisfactionItem"),
-											 rs.getString("satisfactionData"),
-											 rs.getString("employmentItem"),
-											 rs.getString("employmentData"),
-											 rs.getString("applicantItem"),
-											 rs.getString("applicantData"),
-											 rs.getString("priority"));
-						return majorVo;
-			}
-		}
-//				,
-//				((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 (1-1) * 10 = 0이고 + 1 하면 1 항상 1,11,21같이 시작해야 해서 +1
-//				 cri.getPageNum() * cri.getAmount()
-				);
+		return jdbc.query(sql.toString(), new MajorMapper());
 	}
+	
+//	new	RowMapper<MajorVo>(){
+//		@Override
+//		public MajorVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			MajorVo majorVo = new MajorVo(rs.getString("lClass"),
+//										 rs.getString("majorSeq"),
+//										 rs.getString("uni"),
+//										 rs.getString("major"),
+//										 rs.getString("salary"),
+//										 rs.getString("employment"),
+//										 rs.getString("department"),
+//										 rs.getString("summary"),
+//										 rs.getString("subject_description"),
+//										 rs.getString("subject_name"),
+//										 rs.getString("act_name"),
+//										 rs.getString("act_description"),
+//										 rs.getString("job"),
+//										 rs.getString("qualifications"),
+//										 rs.getString("interest"),
+//										 rs.getString("property"),
+//										 rs.getString("gradeuate"),
+//										 rs.getString("description"),
+//										 rs.getString("SBJECT_NM"),
+//										 rs.getString("SBJECT_SUMRY"),
+//										 rs.getString("area"),
+//										 rs.getString("schoolURL"),
+//										 rs.getString("campus_nm"),
+//										 rs.getString("majorName"),
+//										 rs.getString("schoolName"),
+//										 rs.getString("fieldItem"),
+//										 rs.getString("fieldData"),
+//										 rs.getString("afterItem"),
+//										 rs.getString("afterData"),
+//										 rs.getString("salaryItem"),
+//										 rs.getString("salaryData"),
+//										 rs.getString("satisfactionItem"),
+//										 rs.getString("satisfactionData"),
+//										 rs.getString("employmentItem"),
+//										 rs.getString("employmentData"),
+//										 rs.getString("applicantItem"),
+//										 rs.getString("applicantData"),
+//										 rs.getString("priority"));
+//					return majorVo;
+//		}
+//	}
+			
 	@Override
 	public int majorReTotal(MajorTest majorTest, Criteria cri) {
 		StringBuilder sql = new StringBuilder();

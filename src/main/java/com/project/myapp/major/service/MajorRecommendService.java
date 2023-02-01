@@ -7,5 +7,5 @@ import com.project.myapp.major.model.MajorVo;
 import com.project.myapp.page.model.Criteria;
 
 public interface MajorRecommendService {
-	public List<MajorVo> majorRecommend(MajorTest majorTest, Criteria cri);
+	public List<MajorVo> majorRecommend(MajorTest majorTest);
 }
