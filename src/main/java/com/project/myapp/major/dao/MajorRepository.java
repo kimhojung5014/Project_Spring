@@ -134,7 +134,8 @@ public class MajorRepository implements IMajorRepository{
 		if (majorTest.getPriority().equals("SATISFACTIONDATA")) {
 			sql.append("select * "+
 					   "from(select ROW_NUMBER() OVER (ORDER BY REGEXP_SUBSTR ("+majorTest.getPriority()+",'[^@]+', 1, 5) desc," +
-					   	    "REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 4) desc)as rn,REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 5)priority , m.* "+
+					   	    "REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 4) desc)as rn,"+
+		   	    		   "REGEXP_SUBSTR ("+majorTest.getPriority()+", '[^@]+', 1, 5)priority , m.* "+
 						    "from majordetail m ");
 		}
 		else {
@@ -153,9 +154,11 @@ public class MajorRepository implements IMajorRepository{
 		else if (majorTest.getLclass().equals("all") && !majorTest.getUni().equals("all")) {
 			sql.append("where uni like '"+majorTest.getUni()+"' ");
 		}
-		if ((!majorTest.getLclass().equals("all") || !majorTest.getUni().equals("all")) && (majorTest.getMoney().equals("경제적으로 힘든 상황") || majorTest.getTime().equals("온라인만 가능"))) {
+		if ((!majorTest.getLclass().equals("all") || !majorTest.getUni().equals("all")) && 
+				(majorTest.getMoney().equals("경제적으로 힘든 상황") || majorTest.getTime().equals("온라인만 가능"))) {
 			sql.append("and (m.schoolname like '%한국방송통신%' or m.schoolname like '%사이버%')");
-		}else if ((majorTest.getLclass().equals("all") && majorTest.getUni().equals("all")) && (majorTest.getMoney().equals("경제적으로 힘든 상황") || majorTest.getTime().equals("온라인만 가능"))) {
+		}else if ((majorTest.getLclass().equals("all") && majorTest.getUni().equals("all")) &&
+				(majorTest.getMoney().equals("경제적으로 힘든 상황") || majorTest.getTime().equals("온라인만 가능"))) {
 			sql.append("where m.schoolname like '%한국방송통신%' or m.schoolname like '%사이버%'");
 		}
 		sql.append(") ");
