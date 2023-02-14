@@ -31,7 +31,7 @@ public class ReplyRepository implements IReplyRepository{
 			replyVo.setContent(rs.getString("content"));
 			replyVo.setCommentDate(rs.getString("commentdate"));
 			replyVo.setCommentNum(rs.getInt("commentNum"));
-			replyVo.setstep(rs.getInt("step"));
+			replyVo.setParentNickName(rs.getString("parentnickname"));
 			return replyVo;
 		}
 		
@@ -60,7 +60,7 @@ public class ReplyRepository implements IReplyRepository{
 //	}
 	@Override
 	public List<ReplyVo> replyList(int writeNum, Criteria cri) {
-		String sql = "select step,nickname, content, commentnum,commentdate, userid,parentnum  from(select ROWNUM rn,level as step,nickname,content,commentnum,userid,parentnum,commentdate  from reply where writenum = ? start with parentnum = 0  connect by prior commentnum = parentnum) where rn BETWEEN ? and ?";
+		String sql = "select parentNickname,nickname, content, commentnum,commentdate, userid,parentnum  from(select ROWNUM rn,parentNickname,nickname,content,commentnum,userid,parentnum,commentdate  from reply where writenum = ? start with parentnum = 0  connect by prior commentnum = parentnum) where rn BETWEEN ? and ?";
 		return jdbc.query(sql, new ReyplyMapper(),
 						 writeNum,
 						((cri.getPageNum()-1) * cri.getAmount())+1,// page가 1일 경우 (1-1) * 10 = 0이고 + 1 하면 1 항상 1,11,21같이 시작해야 해서 +1
@@ -69,9 +69,10 @@ public class ReplyRepository implements IReplyRepository{
 
 	@Override
 	public void replyInsert(ReplyVo replyVo) {
-		String sql = "INSERT INTO REPLY(writeNum,commentnum,parentNum,userId, nickname,content,commentDate)" + 
-				"values(?,commentNum.nextval,?,?,?,?,TO_CHAR(SYSDATE,'YYYY\"년\" MM\"월 \"DD\"일 \"hh24\"시 \"mi\"분 \"ss\"초\"'))";		
-		jdbc.update(sql,replyVo.getWriteNum(),
+		String sql = "INSERT INTO REPLY(parentNickName,writeNum,commentnum,parentNum,userId, nickname,content,commentDate)" + 
+				"values(?,?,commentNum.nextval,?,?,?,?,TO_CHAR(SYSDATE,'YYYY\"년\" MM\"월 \"DD\"일 \"hh24\"시 \"mi\"분 \"ss\"초\"'))";		
+		jdbc.update(sql,replyVo.getParentNickName(),
+						replyVo.getWriteNum(),
 						replyVo.getParentNum(),
 						replyVo.getUserId(),
 						replyVo.getNickName(),

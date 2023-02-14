@@ -32,4 +32,8 @@ public class EduController {
 	public String bankrequest() {
 		return "edu/bankrequest";
 	}
+	@GetMapping(value = "difference")
+	public String difference() {
+		return "edu/difference";
+	}
 }

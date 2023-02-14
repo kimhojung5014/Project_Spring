@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/* 
+본문은 14~17px가 많이 쓰인다. 글씨 줄이자
+font-xs: 0.75rem  12px
+font-sm: 0.875rem 14px
+font-base: 1rem   16px
+font-lg: 1.125rem 18px
+font-xl: 1.25rem  20px  
+*/
+
+
+/* 메인 레이아웃 그리드  */
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1000px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  font-size: 0.75rem;
+  padding-top: 50px;
+}
+/* 공통 css */
+/* 제목 단 */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left:30px ;
+  border-left: solid gray;
+}
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+/* 부부제목 */
+.subsubtitle {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+/* 부부부제목 */
+.texttitle {
+  font-weight: bold;
+}
+/* 필드셋 경계선 */
+.fieldtype {
+  border-style: none;
+  padding-left: 50px;
+}
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+/* 공통 css 끝 */
+
+/* 직업 추천 css 시작*/
+
+/* 전체 감싸는 클래스 공통 글꼴 줄수 있다. */
+.textarea {
+  font-size: 1rem;
+
+  padding: 50px 50px;
+
+}
+
+.intextarea{
+  padding: 30px 50px;
+}
+/*  */
+#kindOfJob{
+  height: 40px;
+  width: 300px;
+}
+
+
+/* list 블록 가로배치 라인 높이 공용  */
+.jobAptitude li{
+  display: inline-block;
+  /* list li간격 */
+  line-height: 50px;
+
+  /* width: 80px; */
+}
+/* 결과보기 버튼 */
+.submitbutton {
+  font-size: 1.25rem;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  color: white;
+  background-color: rgb(54, 82, 168);
+  border: none;
+  font-weight: bold;
+}
+
+.submitbutton:hober {
+ 
+  background-color: silver;
+
+}
+/* 직업 추천 css끝 */
+
+/* 여기서부턴 아래 쪽 직업 정보 출력 css */
+.rowLine {
+  height:auto;
+  padding-top:10px;
+}
+/* 표에서 직업이름 행  */
+.listHeadLine{
+  background-color: #d5e3f1;
+  line-height: 40px;
+  padding: 10px 20px ;
+}
+/* 직업 줄에서 직업 이름 공백  */
+.listJobName {
+  display: inline-block;
+  width:500px;
+}
+.listJobName a:hover {
+  color:purple;
+   text-decoration:underline;
+}
+/* 직업 칸에서  연봉, 발전 가능성 , 고용평등*/
+.listJobEtc {
+  display: inline-block;
+  width: 150px; 
+}
+.listJobEtc2 {
+  display: inline-block;
+  width: 400px; 
+}
+.listJobEtcColor {
+  color: rgb(76, 111, 219);
+  font-weight:bold;
+}
+
+/* 직업에서 아래칸 설명 부분 */
+.listJobExplain {
+
+  line-height: 20px;
+  padding: 10px 20px;
+}
+/* 직업 정보 css 끝 */
+
+/* 직업 정보 아래쪽 페이지 번호 */
+#pageNumber li{
+  display: inline-block;
+  font-size: 1rem;
+  width: 20px;
+}

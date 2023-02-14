@@ -187,6 +187,4 @@ public class MemberController {
 		
 		return "member/Msg";
 	}
-	
-
 }

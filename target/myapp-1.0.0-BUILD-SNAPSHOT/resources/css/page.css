@@ -1,0 +1,52 @@
+@charset "UTF-8";
+/*페이지 번호 처리*/
+  .pageInfo{
+	  border-spacing : 10px;
+      margin:auto; 
+
+      text-align: center;
+  }
+  .pageInfo_btn{
+
+    font-size: 1rem;
+    width: 30px;
+	height: 25px;
+  }
+  .pageInfo_btn a{
+    display: inline-block;
+    width: 30px;
+	height: 25px;
+  }
+  .active{
+      background-color: silver;
+  }
+
+  .pageInfo_btn a:hover {
+ color:black; 
+ text-decoration: underline;
+ 	background: gray;
+	color: white;
+ }
+ 
+ /* 검색버튼 */
+.searchbutton {
+
+  display:inline-block;
+  font-size: 1rem;
+  width: 70px;
+  line-height: 30px;
+  border-radius: 10px;
+  color: white;
+  background-color:rgb(76, 111, 219);
+  border: none;
+  font-weight: bold;
+}
+.searchbutton:hover{
+ background:silver;
+}
+#search {
+ width:200px;
+ line-height:25px;
+ border-radius: 5px;
+ border:solid 1px gray;
+}

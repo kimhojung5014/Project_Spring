@@ -176,7 +176,6 @@
 				<!--작성자 아이디 닉네임도 보내준다 -->
 	        	<input type="hidden" name="userId" value="${userData.userId }">
 	        	<input type="hidden" name="nickName" value="${userData.nickName }">
-	        	<!--  날짜는 객체 매핑하려고 보냄 -->
 	        	
 	        	<!--로그인 해야만 답글달기 버튼 활성화 -->
 	        	<c:if test="${userData ne null }">
@@ -195,18 +194,18 @@
 				<!--댓글 반복문 페이지번호에 있는 댓글 전부 출력  -->
     		    <c:forEach var="reply" items="${replyList}" varStatus="status">
 		        	<table class="comment">
-							<tr>
-		           			<th>
-							<c:if test="${reply.parentNum ne 0 }">
-								<c:forEach var="parent" items="${replyList}" >
-									<c:if test="${parent.commentNum eq reply.parentNum }">
-										<p>&nbsp;&nbsp;&nbsp;<b style="color: silver;">@${parent.nickName }</b></p>
-									</c:if>
-								</c:forEach>
-							</c:if>
-		           			${ reply.nickName}
+						<tr>
+							<c:if test="${reply.parentNickName ne null }">
+		           			<th style="padding-left: 20px;">
+								<p>&nbsp;&nbsp;&nbsp;<b style="color: silver;">@${reply.parentNickName }</b></p>
+			           			${ reply.nickName}
 		           			</th>
-
+							</c:if>
+							
+							<c:if test="${reply.parentNickName eq null }">
+		           			<th>${ reply.nickName}</th>
+							</c:if>
+							
 						<!-- 글 속성을 input readonly로 해서 값 불러오고 수정시 readonly 풀며 될 듯 -->
 		           			
 		           			<td>${reply.commentDate}</td>
@@ -221,20 +220,21 @@
 							<td><button class="deleteButton" onclick="chooseDelete(${reply.commentNum},${boardVo.writeNum})">삭제</button></td>
 						</c:if>
 						</tr>
+						
 						<c:if test="${reply.parentNum ne 0 }">
-						<tr>
-						<td colspan="3" style="padding-left: 30px; ">
+						<tr >
+						<td colspan="3" >
 
-							<textarea style="border: none; padding-left: 20px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+							<textarea style="border: none; padding-left: 80px;" name="replyContent" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" readonly="readonly" >${reply.content}</textarea>
 						</td>
 						
 						</tr>
 						</c:if>
+						
 						<c:if test="${reply.parentNum eq 0 }">
 						<tr >
 						<td colspan="3" >
-
-							<textarea style="border: none; padding-left: 25px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+							<textarea style="border: none; padding-left: 30px;" name="replyContent" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" readonly="readonly">${reply.content}</textarea>
 						</td>
 						
 						</tr>
@@ -252,6 +252,7 @@
 						       		<input type="hidden" name="userId" value="${userData.userId }">
 						       		<input type="hidden" name="nickName" value="${userData.nickName }">
 									<input type="hidden" name="parentNum" value="${reply.commentNum }">
+									<input type="hidden" name="parentNickName" value="${reply.nickName}">
 									<input type="hidden" name="writeNum" value="${boardVo.writeNum}">
 									<!--  날짜는 객체 매핑하려고 보냄 -->
 			               				<textarea name="content" class="recontent"  required="required" maxlength="1000" rows="2" cols="83" ></textarea>

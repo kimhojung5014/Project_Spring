@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.project.myapp.board.service.TestBoard;
 import com.project.myapp.major.model.MajorTest;
 import com.project.myapp.major.service.MajorDetailService;
 import com.project.myapp.major.service.MajorListService;
@@ -58,6 +59,17 @@ public class MajorController {
 	public String majorRecommend(MajorTest majorTest, Model model) {
 		
 		model.addAttribute("majorList", majorRecommendServiceImpl.majorRecommend(majorTest));
+		
+		if (majorTest.getPriority().equals("employmentdata")) {
+			majorTest.setPriority("취업률");
+		}else if (majorTest.getPriority().equals("salarydata")) {
+			majorTest.setPriority("임금");
+		}else {
+			majorTest.setPriority("직업 만족도");
+		}
+		if (majorTest.getUni().equals("all")) {
+			majorTest.setUni("대학교(4,2년제 전체)");
+		}
 		
 		model.addAttribute("majorTest", majorTest);
 		

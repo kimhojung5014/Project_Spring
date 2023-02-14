@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/* 
+본문은 14~17px가 많이 쓰인다. 글씨 줄이자
+font-xs: 0.75rem  12px
+font-sm: 0.875rem 14px
+font-base: 1rem   16px
+font-lg: 1.125rem 18px
+font-xl: 1.25rem  20px  
+*/
+
+
+/* 메인 레이아웃 그리드  */
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1024px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  font-size: 1rem;
+  padding-top: 50px;
+}
+/* 공통 css */
+/* 제목 단 */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* padding-left:50px ; */
+  text-align: center;
+}
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  /* width: 400px; */
+}
+/* 부부제목 */
+.subsubtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color:  rgb(54, 82, 168);
+}
+/* 부부부제목 */
+.texttitle {
+  font-weight: bold;
+  font-size: 1rem;
+}
+/* 필드셋 경계선 */
+.fieldtype {
+  border-style: none;
+  padding-left: 50px;
+}
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+/* 공통 css 끝 */
+
+/* 직업 추천 css 시작*/
+
+/* 전체 감싸는 클래스 공통 글꼴 줄수 있다. */
+.textarea {
+  font-size: 1rem;
+
+  padding: 10px 50px;
+
+  line-height: 2.5rem;
+}
+/* 테스트에어리어 안에 패팅 값 주는 */
+.intextarea{
+  padding: 30px 50px;
+}
+
+/* 3단 텍스트 레이아웃 */
+.inintextarea {
+  padding-left: 20px;
+}
+
+/* 직업개요 리스트  */
+.jobExplainList {
+  list-style-type: "- ";
+  padding-left: 20px;
+}
+
+.link:hover{
+  color:purple;
+   text-decoration:underline;
+}

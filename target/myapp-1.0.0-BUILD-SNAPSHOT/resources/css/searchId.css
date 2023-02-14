@@ -1,0 +1,127 @@
+@charset "UTF-8";
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  400px minmax(0px,1fr);
+  grid-template-rows: 500px;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+  text-align: center;
+  padding-top: 50px;
+}
+/* 공통 css */
+/* 제목 단 */
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding-left:30px ;
+  border-left: solid gray;
+}
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  /* width: 400px; */
+}
+
+
+/* 공통 css 끝 */
+
+/* 직업 추천 css 시작*/
+
+/* 전체 감싸는 클래스 공통 글꼴 줄수 있다. */
+.textarea {
+  font-size: 1rem;
+
+  padding: 50px 10px;
+
+}
+.textleft{
+  text-align: left;
+  padding-left: 60px;
+}
+
+/* 폼 버튼 스타일 결과보기 다시하기 용 */
+.button {
+  background-color:rgb(76, 111, 219);
+  border-style: none;
+  border-radius: 20px;
+  width: 100px;
+  line-height: 30px;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.button a {
+  color: white;
+}
+
+button:hover {
+  background-color:#aaa;
+}
+
+#join {
+  border-collapse: collapse;
+
+  width: 100%;
+}
+
+#join td{
+  height: 50px;
+  
+}
+
+
+.textleft{
+  text-align: left;
+  padding-left: 60px;
+}
+
+
+#join input{
+  /* width: 100px; */
+
+  height: 30px;
+
+  font-size: 1rem;
+
+  text-align: center;
+
+  border-radius: 5px;
+
+  border: solid 1px rgb(170, 170, 170);
+}
+#join p {
+	font-size: 0.875rem;
+}
+input{
+  /* width: 100px; */
+
+  height: 30px;
+
+  font-size: 1rem;
+
+  text-align: center;
+
+  border-radius: 5px;
+
+  border: solid 1px rgb(170, 170, 170);
+}

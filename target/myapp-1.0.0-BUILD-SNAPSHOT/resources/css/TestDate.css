@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1000px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  padding-top: 50px;
+}
+
+
+#tablest{
+  width: 100%;
+  /* background-color: rgb(235, 235, 235); */
+  background-color: white;
+  border-collapse: collapse;
+}
+#tablest td{
+  text-align: center;
+  /* border: solid; */
+  /* border-color: black; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#tablest li{
+  text-align: left;
+  font-weight: bold;
+  list-style-type: disc;
+}
+
+#tablest li::marker{
+  color: rgb(76, 111, 219);
+}
+
+.listtd{
+  padding-left: 50px; 
+}
+
+.first {
+  font-size: 1.2rem;
+  
+  color: rgb(76, 111, 219);
+
+  font-weight: bold;
+}
+
+.one{
+  display: inline-block;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  padding-top: 35px;
+  background-color: rgb(76, 111, 219);
+  color: white;
+  font-weight: bold;
+}
+
+/* 제목 단 */
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left:30px ;
+  border-left: solid gray;
+}
+
+/* 부제목 단 */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: rgb(54, 82, 168);
+  line-height: 50px;
+  color: white;
+  padding-left: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+
+
+/* 리스트 설정 끝  */
+
+/* 폼 버튼 스타일 결과보기 다시하기 용 */
+.buttonsumit {
+  /* background-color: rgb(49, 102, 206); */
+  background: rgb(76, 111, 219);
+  border-style: none;
+  border-radius: 10px;
+  width: 150px;
+  line-height: 50px;
+  /* color: white; */
+  font-size: 1.3rem;
+  font-weight: bold;
+  /* bottom: 10%; */
+  /* left: 15%; */
+  /* position: absolute; */
+}
+.buttonsumit a{
+  color: white;
+}
+
+button:hover {
+  background-color:#aaa;
+  font-size: 1.4rem;
+}
+

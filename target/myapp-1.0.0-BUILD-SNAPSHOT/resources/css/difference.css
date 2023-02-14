@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* 메인 레이아웃 그리드  */
+#mainStyle {
+
+  display:grid;
+  grid-template-columns: minmax(0px,1fr)  1024px minmax(0px,1fr);
+  grid-template-rows: 1fr;
+  /* text-align: center; */
+  /* 양 옆 마진  */
+
+  /* 그리드 간격 50px */
+  /* gap: 50px; */
+  /* gap: 40px; */
+
+
+  grid-template-areas: 
+  ". mainContent . "; 
+}
+
+#mainContent {
+
+  grid-area: mainContent;
+
+  /* border: solid 1px; */
+
+  padding-top: 50px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left:30px ;
+  border-left: solid gray;
+}
+
+/* 센터 정렬 전용 클래스 */
+.oncenter {
+  text-align: center;
+}
+/* 결과보기 버튼 */
+.submitbutton {
+  font-size: 1.125rem;
+  width: 180px;
+  height: 60px;
+  border-radius: 20px;
+  color: white;
+  background-color:rgb(76, 111, 219);
+  border: none;
+  font-weight: bold;
+}
+.submitbutton a{
+  color: white;
+}
+/* 공통 css 끝 */
+
+/* 테이블 스타일 */
+#tableSt {
+  display: block;
+
+  border-collapse: collapse;
+
+}
+
+#tableSt>thead {
+  background-color:rgb(76, 111, 219);
+}
+
+
+/* 테이블 제목 열 */
+#tableSt th{
+  
+
+
+  color: white;
+
+  font-size: 1.25rem;
+  
+  border: solid 0.5px;
+
+  width: 300px;
+
+  height: 50px;
+}
+
+/* 테이블 셀  */
+#tableSt td{
+  border: solid;
+  border-width: 0.5px;
+  border-color: silver;
+  padding: 10px 20px;
+  line-height: 30px;
+  word-spacing: 0.5rem;
+  font-weight: bold;
+}
+/* 데이블 칸 줄 */
+#tableSt th,td,tbody,thead{
+
+  border-color: silver;
+
+}
+
+
+
+/* 버튼 스타일 결과보기 다시하기 용 */
+
+button a{
+  color: white;
+}
+
+button:hover {
+  background-color:#aaa;
+  font-size: 1.25rem;
+}

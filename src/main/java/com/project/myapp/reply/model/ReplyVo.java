@@ -4,47 +4,24 @@ public class ReplyVo {
 
 	private int writeNum,//글 번호 외래키
 				commentNum,//댓글 번호 외래키
-				parentNum,
-				step;
+				parentNum;
 	
-	public int getstep() {
-		return step;
-	}
 
-	public void setstep(int step) {
-		this.step = step;
-	}
 
 	private String userId,
 				   nickName,
 				   content,
-				   commentDate;
+				   commentDate,
+				   parentNickName;
 	
-	public ReplyVo() {}
-	
-	//DAO에서 정보 받아올 때 쓰는 생성자
-	public ReplyVo( int commentNum, int parentNum, String userId, String nickName,
-			String content, String commentDate, int step) {
-		
-		this.commentNum = commentNum;
-		this.parentNum = parentNum;
-		this.userId = userId;
-		this.nickName = nickName;
-		this.content = content;
-		this.commentDate = commentDate;
-		this.step = step;
+	public String getParentNickName() {
+		return parentNickName;
 	}
 
-	//날짜 제외한 생성자. 컨트롤러에서 jsp에서 보낸 값 받고 객체로 만들 때 사용
-	public ReplyVo(int writeNum, int parentNum, String userId, String nickName,
-			String content) {
-		this.writeNum = writeNum;
-
-		this.parentNum = parentNum;
-		this.userId = userId;
-		this.nickName = nickName;
-		this.content = content;
+	public void setParentNickName(String parentNickName) {
+		this.parentNickName = parentNickName;
 	}
+
 
 	public void setParentNum(int parentNum) {
 		this.parentNum = parentNum;
