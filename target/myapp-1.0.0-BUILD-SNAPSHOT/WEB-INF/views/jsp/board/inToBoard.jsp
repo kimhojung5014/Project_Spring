@@ -225,7 +225,7 @@
 						<tr >
 						<td colspan="3" >
 
-							<textarea style="border: none; padding-left: 80px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+							<textarea style="border: none; padding-left: 80px;" name="replyContent" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" readonly="readonly" >${reply.content}</textarea>
 						</td>
 						
 						</tr>
@@ -234,7 +234,7 @@
 						<c:if test="${reply.parentNum eq 0 }">
 						<tr >
 						<td colspan="3" >
-							<textarea style="border: none; padding-left: 30px;" name="content" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" >${reply.content}</textarea>
+							<textarea style="border: none; padding-left: 30px;" name="replyContent" class="recontent"  required="required" maxlength="1000" rows="3" cols="83" readonly="readonly">${reply.content}</textarea>
 						</td>
 						
 						</tr>
