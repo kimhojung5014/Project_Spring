@@ -58,7 +58,7 @@ public class MemberController {
 	
 	@GetMapping(value = "/")
 	public String home() {
-		return "index";
+		return "main/index";
 	}
 	
 	//회원가입

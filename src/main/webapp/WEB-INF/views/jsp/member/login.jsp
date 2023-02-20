@@ -7,15 +7,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="resources/css/header_footer.css">
-  <link rel="stylesheet" href="resources/css/login.css?12"> 
+  <link rel="stylesheet" href="/css/login.css?12"> 
   <title>로그인 페이지</title>
 </head>
 <body>
-<script src="resources/js/Join_Check.js?123"></script>
-  <!-- 헤더 부분 -->
+<script src="/js/Join_Check.js?123"></script>
 
-  <!-- 헤더 끝 -->
 
 
   <!-- 메인 부분 -->
@@ -72,7 +69,6 @@
 
 
 <!-- 메인  끝-->
-  <!-- 푸터 -->
 
 </body>
 </html>

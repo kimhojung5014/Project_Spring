@@ -6,9 +6,9 @@ font-family: 'Noto Sans KR', sans-serif;
 /* 네이버 나눔 고딕 본문용
 font-family: 'Nanum Gothic', sans-serif;
 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap'); */
 
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Nanum+Gothic&family=Noto+Sans+KR&family=Song+Myung&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Nanum+Gothic&family=Noto+Sans+KR&family=Song+Myung&display=swap'); */
 *{
   margin: 0;
   padding: 0;

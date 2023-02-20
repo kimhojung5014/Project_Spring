@@ -36,4 +36,5 @@ public class EduController {
 	public String difference() {
 		return "edu/difference";
 	}
+
 }

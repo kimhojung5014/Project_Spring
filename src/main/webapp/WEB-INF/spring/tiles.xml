@@ -3,15 +3,23 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp"> 
-    <put-attribute name="title" value="" />
-    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-    <put-attribute name="body" value="" />
-    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" /> 
-  </definition>
+	<!-- baseLayout : 공통 레이아웃의 뷰 이름 -->
+	<!-- template : 전체 레이아웃을 정하는 JSP의 위치 지정 -->
+	<definition name="Layout"
+		template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+	</definition>
 
-  <definition name="main" extends="baseLayout"> 
-    <put-attribute name="title" value="메인 페이지" /> 
-    <put-attribute name="body" value="/WEB-INF/views/{1}index.jsp" /> 
-  </definition>
+	<!-- 메인 화면의 뷰 이름 지정 / extends: 기본적인 레이아웃은 baseLayout을 상속받음을 표시 -->
+	<definition name="member/login" extends="Layout">	
+		<!-- 레이아웃의 본문에 표시할 JSP 지정 -->
+		<put-attribute name="content" value="/WEB-INF/views/jsp/member/login.jsp" />
+		<put-attribute name="title" value="나의 진로 추천 서비스" />
+	</definition>
+	<definition name="*/*" extends="Layout">	
+		<!-- 레이아웃의 본문에 표시할 JSP 지정 -->
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}/{2}.jsp" />
+		<put-attribute name="title" value="나의 진로 추천 서비스" />
+	</definition>
 </tiles-definitions>
