@@ -44,6 +44,8 @@ font-xl: 1.25rem  20px
   padding-left: 20px;
   border-radius: 20px;
   text-align: center;
+  width:500px;
+  margin:auto;
 }
 /* 부부제목 */
 .subsubtitle {
